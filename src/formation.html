@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formation</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-black text-white">
 
-  <!-- Header -->
-  <header class="p-4 bg-gray-800 flex justify-between items-center">
-    <h1 class="text-2xl font-bold">Formation</h1>
-  </header>
+  <div class="flex flex-col h-screen text-xl font-bold">
+    <!-- Desktop Version -->
+    <nav class="hidden md:flex justify-end gap-10 bg-zinc-800 text-white p-6">
+      <a href="index.html" class="hover:text-green-400 ">Accueil</a>
+      <a href="favoris.html" class="hover:text-green-400">Favoris</a>
+      <a href="statistiques.html" class="hover:text-green-400">Statistiques</a>
+      <a href="profil.html" class="hover:text-green-400 mr-12">Profil</a>
+    </nav>
 
-  <!-- Contenu principal -->
-  <main class="p-4">
-    <h2 class="text-xl font-bold mb-4">Détails de la Formation</h2>
-    <div class="bg-gray-800 p-4 rounded mb-4">
-      <h3 class="font-bold">Nom du Master :</h3>
-      <p>Master en Intelligence Artificielle</p>
-    </div>
-    <div class="bg-gray-800 p-4 rounded mb-4">
-      <h3 class="font-bold">Université :</h3>
-      <p>Université de Laval</p>
-    </div>
-    <div class="bg-gray-800 p-4 rounded">
-      <h3 class="font-bold">Description :</h3>
-      <p>
-        Formation spécialisée dans l'étude et la mise en œuvre des technologies de l'intelligence artificielle.
-      </p>
-    </div>
-  </main>
+    <!-- Contenu principal -->
+    <main class="p-4">
+      <h2 class="text-xl font-bold mb-4">Détails de la Formation</h2>
+      <div class=" bg-zinc-800 p-4 rounded mb-4">
+        <h3 class="font-bold">Nom du Master :</h3>
+        <p>Master en Intelligence Artificielle</p>
+      </div>
+      <div class=" bg-zinc-800 p-4 rounded mb-4">
+        <h3 class="font-bold">Université :</h3>
+        <p>Université de Laval</p>
+      </div>
+      <div class=" bg-zinc-800 p-4 rounded">
+        <h3 class="font-bold">Description :</h3>
+        <p>
+          Formation spécialisée dans l'étude et la mise en œuvre des technologies de l'intelligence artificielle.
+        </p>
+      </div>
+    </main>
 
-  <!-- Menu fixe -->
-  <footer class="fixed bottom-0 left-0 w-full bg-gray-800 flex justify-around py-2">
-    <a href="index.html" class="text-sm text-gray-300">Accueil</a>
-    <a href="profil.html" class="text-sm text-gray-300">Profil</a>
-    <a href="favoris.html" class="text-sm text-gray-300">Favoris</a>
-    <a href="statistiques.html" class="text-sm text-gray-300">Statistiques</a>
-  </footer>
+    <!-- Mobile Version -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-800 text-white flex justify-around p-4">
+      <a href="index.html" class="hover:text-green-400 flex flex-col items-center">
+        <span>🏠</span>
+        <span class="text-sm">Accueil</span>
+      </a>
+      <a href="favoris.html" class="hover:text-green-400 flex flex-col items-center">
+        <span>⭐</span>
+        <span class="text-sm">Favoris</span>
+      </a>
+      <a href="statistiques.html" class="hover:text-green-400 flex flex-col items-center">
+        <span>📊</span>
+        <span class="text-sm">Statistiques</span>
+      </a>
+      <a href="profil.html" class="hover:text-green-400 flex flex-col items-center">
+        <span>👤</span>
+        <span class="text-sm">Profil</span>
+      </a>
+    </nav>
+  </div>
 
 </body>
+
 </html>

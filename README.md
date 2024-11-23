@@ -1,4 +1,8 @@
 # sae3.01-3.03-groupe-4
+
+### Diagramme de composants de l'application web
+![Diagramme de composants](assets/images/Diagramme_de_composants.png)
+
 ### Présentation technique de l'application NaMaster
 
 #### **1. Introduction**
@@ -33,7 +37,6 @@ L’architecture est construite sur une approche modulaire, respectant les bonne
 #### **4. Fonctionnalités principales**
 1. **Recherche de master** :
    - Système de recherche avancée par filtres (région, secteur, établissement, etc.).
-   - Suggestions dynamiques basées sur les préférences utilisateurs.
 2. **Visualisation des données** :
    - Graphiques interactifs (courbes et cartes de chaleur) générés via **ECharts**.
    - Comparaison des masters selon des critères précis (taux d’insertion, salaires, etc.).
@@ -47,7 +50,7 @@ L’architecture est construite sur une approche modulaire, respectant les bonne
    - Suivi des candidatures en cours.
 6. **Candidatures** :
    - Affichage des statistiques des candidatures pour chaque master.
-   - Suivi des candidatures personnelles avec des recommandations automatiques.
+   - Suivi des candidatures personnelles
 
 ---
 
@@ -66,5 +69,4 @@ L’architecture est construite sur une approche modulaire, respectant les bonne
 
 #### **7. Sécurité**
 - Utilisation de requêtes préparées avec PDO pour éviter les injections SQL.
-- Stockage des mots de passe utilisateurs avec le hashage (algorithme **bcrypt**).
 - HTTPS activé sur [perso.univ-lemans.fr](https://perso.univ-lemans.fr/) pour sécuriser les échanges.

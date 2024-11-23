@@ -67,6 +67,78 @@ L’architecture est construite sur une approche modulaire, respectant les bonne
 
 ---
 
-#### **7. Sécurité**
+#### **6. Sécurité**
 - Utilisation de requêtes préparées avec PDO pour éviter les injections SQL.
 - HTTPS activé sur [perso.univ-lemans.fr](https://perso.univ-lemans.fr/) pour sécuriser les échanges.
+
+---
+
+### Guide de Déploiement pour le Site Web **NaMaster**
+
+---
+
+#### **Pré-requis**
+
+1. **Environnement local** :
+   - **Node.js** : Version ≥ 22.
+   - **Navigateur moderne** : Supportant HTML5 et JavaScript.
+   - Un serveur HTTP local ou un **Live Server** fourni par des IDE comme Visual Studio Code.
+   - **npm** installé pour gérer les dépendances.
+
+2. **Base de données** :
+   - **PHPMyAdmin** ou un autre outil de gestion MySQL/MariaDB pour configurer la base de données.
+
+3. **Dépôt Git** :
+   - Clonez ou téléchargez le dépôt GitHub : [NaMaster - SAE3.01-3.03](https://github.com/i2301534/sae3.01-3.03-groupe-4/tree/main).
+
+---
+
+#### **Étapes de Déploiement**
+
+---
+
+##### 1. **Cloner le projet**
+   - Clonez le dépôt Git sur votre machine locale :
+     ```bash
+     git clone https://github.com/i2301534/sae3.01-3.03-groupe-4.git
+     ```
+   - Accédez au dossier cloné :
+     ```bash
+     cd sae3.01-3.03-groupe-4
+     ```
+
+##### 2. **Installer les dépendances**
+   - Installez les dépendances requises avec npm :
+     ```bash
+     npm install
+     ```
+
+---
+
+##### 3. **Configurer la base de données**
+
+1. **Créer la base de données** :
+   - Ouvrez votre outil de gestion (ex. : PHPMyAdmin) et créez une base de données nommée `namaster`.
+
+2. **Importer le fichier SQL** :
+   - Allez dans l’onglet **Importer** et sélectionnez le fichier `database/schema.sql` fourni dans le projet.
+
+3. **Configurer l’accès à la base de données** :
+   - Modifiez le fichier `config.js` ou `.env` (selon la structure) avec vos informations :
+     ```
+     DB_HOST=localhost
+     DB_NAME=namaster
+     DB_USER=root
+     DB_PASSWORD=yourpassword
+     ```
+
+---
+
+##### 4. **Lancer l’application**
+
+1. **Utilisation d’un Live Server** :
+   - Si vous utilisez un IDE comme Visual Studio Code :
+     - Cliquez droit sur `index.html` et sélectionnez **"Open with Live Server"**.
+   - Accédez à l'application depuis le navigateur à l’adresse fournie par le Live Server (par défaut, `http://127.0.0.1:5500/`).
+
+2. **Utilisation d’un serveur personnel**

@@ -3,7 +3,7 @@
 ### Diagramme de composants de l'application web
 ![Diagramme de composants](assets/images/Diagramme_de_composants.png)
 
-### Présentation technique de l'application NaMaster Léo n
+### Présentation technique de l'application NaMaster Léo nooooo
 
 #### **1. Introduction**
 NaMaster est une application web conçue pour accompagner les étudiants dans leur recherche et sélection de masters. Elle propose une interface intuitive et des fonctionnalités avancées, telles que la visualisation de données, les avis utilisateurs, et la comparaison de formations. L’objectif est de centraliser toutes les informations pertinentes pour faciliter la prise de décision.

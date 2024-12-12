@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaMaster - Page d'accueil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ajout de couleurs personnalisées */
+        :root {
+            --black-custom: #000000; /* Noir complet */
+            --gray-custom: #1C1C1E; /* Gris sombre */
+        }
+    </style>
+</head>
+<body class="bg-black text-white relative">
+    <!-- Container -->
+    <div class="flex flex-col items-center min-h-screen">
+        <!-- Header (Caché sur mobile avec Tailwind) -->
+        <header class="hidden md:flex w-full" style="background-color: var(--gray-custom); padding: 1rem;">
+            <div class="flex items-center justify-between w-full">
+                <div class="w-12 h-12" style="background-color: var(--gray-custom); border-radius: 0.375rem;"></div> <!-- Emplacement du logo -->
+                <nav class="flex space-x-4">
+                    <a href="#" class="text-green-500">Accueil</a>
+                    <a href="#" class="hover:text-green-400">Favoris</a>
+                    <a href="#" class="hover:text-green-400">Statistiques</a>
+                    <a href="#" class="hover:text-green-400">Profil</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow w-full p-4 md:flex md:justify-center md:items-center">
+            <div class="w-full md:w-1/2" style="background-color: var(--gray-custom); padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <h1 class="text-2xl font-bold text-center mb-4">NaMaster</h1>
+                <!-- Barre de recherche -->
+                <div class="flex items-center mb-6">
+                    <input
+                        type="text"
+                        placeholder="Rechercher un Master..."
+                        class="w-full p-3 rounded-l-lg"
+                        style="background-color: var(--black-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
+                    />
+                    <button
+                        class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-r-lg">
+                        🔍
+                    </button>
+                </div>
+                <!-- Boutons supplémentaires -->
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <button id="advancedSearchBtn" class="px-4 py-2" style="background-color: var(--gray-custom); border-radius: 0.375rem; color: white; border: 1px solid var(--black-custom); transition: background-color 0.2s;">
+                        Recherche Avancée
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer (Mobile Navigation) -->
+        <footer class="md:hidden fixed bottom-0 w-full" style="background-color: var(--gray-custom); padding: 1rem;">
+            <div class="flex justify-around items-center">
+                <a href="#" class="text-green-500">Accueil</a>
+                <a href="#" class="text-gray-400 hover:text-green-500">Favoris</a>
+                <a href="#" class="text-gray-400 hover:text-green-500">Statistiques</a>
+                <a href="#" class="text-gray-400 hover:text-green-500">Profil</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Pop-up Modal -->
+    <div id="advancedSearchModal" class="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center hidden">
+        <div class="w-full max-w-lg" style="background-color: var(--gray-custom); padding: 1.5rem; border-radius: 0.5rem;">
+            <h2 class="text-xl font-bold mb-4">Recherche Avancée</h2>
+            <!-- Formulaire de recherche avancée -->
+            <form class="space-y-4">
+                <!-- Dropdown pour Formation -->
+                <div>
+                    <label for="formation" class="block text-sm">Formation</label>
+                    <select
+                        id="formation"
+                        class="w-full p-2 rounded"
+                        style="background-color: var(--black-custom); color: white; outline: none; border: none;"
+                    >
+                        <option>Master 1</option>
+                        <option>Master 2</option>
+                        <option>Licence Professionnelle</option>
+                        <option>Diplôme Universitaire</option>
+                        <!-- Ajoutez d'autres formations ici -->
+                    </select>
+                </div>
+                <!-- Autres champs -->
+                <div>
+                    <label for="ville" class="block text-sm">Ville</label>
+                    <input
+                        type="text"
+                        id="ville"
+                        class="w-full p-2 rounded"
+                        style="background-color: var(--black-custom); color: white; outline: none; border: none;"
+                        placeholder="Ville"
+                    />
+                </div>
+                <div>
+                    <label for="region" class="block text-sm">Région</label>
+                    <input
+                        type="text"
+                        id="region"
+                        class="w-full p-2 rounded"
+                        style="background-color: var(--black-custom); color: white; outline: none; border: none;"
+                        placeholder="Région"
+                    />
+                </div>
+                <div>
+                    <label for="type" class="block text-sm">Type de formation</label>
+                    <select
+                        id="type"
+                        class="w-full p-2 rounded"
+                        style="background-color: var(--black-custom); color: white; outline: none; border: none;"
+                    >
+                        <option>Alternance</option>
+                        <option>Formation Initiale</option>
+                        <option>Formation Continue</option>
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="closeModalBtn" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded">
+                        Annuler
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-600 rounded">
+                        Rechercher
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Gestion du Pop-up
+        const modal = document.getElementById('advancedSearchModal');
+        const openModalBtn = document.getElementById('advancedSearchBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

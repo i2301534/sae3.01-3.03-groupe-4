@@ -1,51 +1,152 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche - NaMaster</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --black-custom: #000000; /* Noir complet */
+            --gray-custom: #1c1c1c; /* Gris sombre */
+        }
+
+        .master-card {
+            background-color: var(--gray-custom);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .master-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .view-details {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: #10B981; /* Vert Tailwind */
+            text-decoration: none;
+        }
+
+        .view-details:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+<body class="bg-black text-white m-0 p-0">
 
-<body class="bg-black text-white">
+  <!-- Header -->
+    <div class="flex flex-col text-xl font-bold">
+        <!-- Desktop Version -->
+        <nav class="hidden md:flex justify-around bg-black text-white p-6">
+          <!-- Accueil -->
+          <a href="index.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
+            <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
+            <span>Accueil</span>
+          </a>
+        
+          <!-- Favoris -->
+          <a href="favoris.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+            <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-6 w-6" />
+            <span>Favoris</span>
+          </a>
+        
+          <!-- Statistiques -->
+          <a href="statistiques.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+            <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-6 w-6" />
+            <span>Statistiques</span>
+          </a>
+        </nav>
+    </div>
 
-  <div class="flex flex-col h-screen text-xl font-bold">
-    <!-- Desktop Version -->
-    <nav class="hidden md:flex justify-end gap-10 bg-zinc-800 text-white p-6">
-      <a href="index.html" class="hover:text-green-400 ">Accueil</a>
-      <a href="favoris.html" class="hover:text-green-400">Favoris</a>
-      <a href="statistiques.html" class="hover:text-green-400">Statistiques</a>
-      <a href="profil.html" class="hover:text-green-400 mr-12">Profil</a>
-    </nav>
+    <!-- Main Content -->
+    <main class="w-full md:flex md:justify-center md:items-center mt-0">
+        <div class="w-full md:w-3/4" style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+            <h1 class="text-2xl font-bold text-center mb-4">Rechercher un Master</h1>
+            
+            <!-- Barre de recherche -->
+            <div class="flex items-center mb-6">
+                <input
+                    type="text"
+                    id="search-bar"
+                    placeholder="Rechercher un Master par nom, ville ou établissement..."
+                    class="w-full p-3 rounded-l-lg"
+                    style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
+                />
+                <button
+                    id="search-button"
+                    class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-r-lg">
+                    🔍
+                </button>
+            </div>
 
-    
-    <main class="flex-grow bg-black text-white p-6">
-      <h1 class="text-2xl font-bold">Nomdelappli</h1>
+            <!-- Liste des Masters -->
+            <div id="masters-container" class="mt-4"></div>
+        </div>
     </main>
 
+  <!-- Footer -->
     <!-- Mobile Version -->
-    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-800 text-white flex justify-around p-4">
-      <a href="index.html" class="hover:text-green-400 flex flex-col items-center">
-        <span>🏠</span>
-        <span class="text-sm">Accueil</span>
-      </a>
-      <a href="favoris.html" class="hover:text-green-400 flex flex-col items-center">
-        <span>⭐</span>
-        <span class="text-sm">Favoris</span>
-      </a>
-      <a href="statistiques.html" class="hover:text-green-400 flex flex-col items-center">
-        <span>📊</span>
-        <span class="text-sm">Statistiques</span>
-      </a>
-      <a href="profil.html" class="hover:text-green-400 flex flex-col items-center">
-        <span>👤</span>
-        <span class="text-sm">Profil</span>
-      </a>
+    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
+        <!-- Accueil -->
+        <a href="index.html" class="flex flex-col items-center">
+          <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+            <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-8 w-8" />
+          </div>
+        </a>
+      
+        <!-- Favoris -->
+        <a href="favoris.html" class="flex flex-col items-center">
+          <div class="h-16 w-16 bg-green-700 rounded-full flex items-center justify-center">
+            <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
+          </div>
+        </a>
+      
+        <!-- Statistiques -->
+        <a href="statistiques.html" class="flex flex-col items-center">
+          <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+            <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-8 w-8" />
+          </div>
+        </a>
+      
+        <!-- Profil -->
+        <a href="profil.html" class="flex flex-col items-center">
+          <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+            <img src="./Images/icon/profil.png" alt="Profil Icon" class="h-8 w-8" />
+          </div>
+        </a>
     </nav>
-  </div>
 
+    <!-- Importation des scripts -->
+    <script src="./javaScript/network.js" type="module"></script>
+    <script src="./javaScript/recherche.js" type="module"></script>
+    <script>
+        // Chargement des masters seulement après une recherche
+        document.getElementById('search-button').addEventListener('click', async () => {
+            const searchBar = document.getElementById('search-bar');
+            const container = document.getElementById('masters-container');
+            container.innerHTML = ""; // Vide le conteneur
+            
+            // Appel API avec le fichier JS
+            const { loadEntities } = await import('./javaScript/network.js');
+            const data = await loadEntities(searchBar.value); // Récupération des données
 
+            // Affichage des données
+            data.forEach(master => {
+                const div = document.createElement('div');
+                div.className = 'master-card';
+                div.innerHTML = `
+                    <div class="master-title">${master.name}</div>
+                    <p>${master.description}</p>
+                    <a href="details.html?id=${master.id}" class="view-details">Voir plus</a>
+                `;
+                container.appendChild(div);
+            });
+        });
+    </script>
 </body>
-
 </html>

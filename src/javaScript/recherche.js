@@ -58,8 +58,7 @@ searchButton.addEventListener('click', () => {
 const query = searchBar.value.trim(); // Récupérer la valeur de la recherche
 updateDisplay(query); // Mettre à jour les masters affichés
 });
-// Initialiser l'affichage sans filtre (afficher toutes les formations au départ)
-updateDisplay();
+
 
 }).catch((error) => {
 console.error("Erreur de chargement des données :", error);

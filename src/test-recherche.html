@@ -7,8 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --black-custom: #000000; 
-            --gray-custom: #1C1C1E; 
+            --black-custom: #000000; /* Noir complet */
+            --gray-custom: #1C1C1E; /* Gris sombre */
         }
 
         .master-card {
@@ -16,7 +16,6 @@
             padding: 1rem;
             border-radius: 0.5rem;
             margin-bottom: 1rem;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             color: white;
         }
 
@@ -29,7 +28,7 @@
         .view-details {
             display: inline-block;
             margin-top: 0.5rem;
-            color: #10B981; 
+            color: #10B981; /* Vert Tailwind */
             text-decoration: none;
         }
 
@@ -40,10 +39,10 @@
 </head>
 <body class="bg-black text-white">
 
-    <!-- Header -->
+    <!-- Header (Masqué sur mobile) -->
     <header class="hidden md:flex w-full" style="background-color: var(--gray-custom); padding: 1rem;">
         <div class="flex items-center justify-between w-full">
-            <div class="w-12 h-12" style="background-color: var(--gray-custom); border-radius: 0.375rem;"></div> 
+            <div class="w-12 h-12" style="background-color: var(--gray-custom); border-radius: 0.375rem;"></div> <!-- Emplacement du logo -->
             <nav class="flex space-x-4">
                 <a href="index.html" class="text-green-500">Accueil</a>
                 <a href="favoris.html" class="hover:text-green-400">Favoris</a>
@@ -55,7 +54,7 @@
 
     <!-- Main Content -->
     <main class="flex-grow w-full p-4 md:flex md:justify-center md:items-center">
-        <div class="w-full md:w-3/4" style="background-color: var(--gray-custom); padding: 1.5rem; border-radius: 0.5rem;">
+        <div class="w-full md:w-3/4" style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
             <h1 class="text-2xl font-bold text-center mb-4">Rechercher un Master</h1>
             
             <!-- Barre de recherche -->
@@ -65,7 +64,7 @@
                     id="search-bar"
                     placeholder="Rechercher un Master par nom, ville ou établissement..."
                     class="w-full p-3 rounded-l-lg"
-                    style="background-color: var(--black-custom); color: white; outline: none; border: none;"
+                    style="background-color: var(--black-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
                 />
                 <button
                     id="search-button"
@@ -79,7 +78,7 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer (Visible uniquement sur mobile) -->
     <footer class="md:hidden fixed bottom-0 w-full" style="background-color: var(--gray-custom); padding: 1rem;">
         <div class="flex justify-around items-center">
             <a href="index.html" class="text-green-500">Accueil</a>
@@ -90,47 +89,8 @@
     </footer>
 
     <!-- Importation des scripts -->
-    <script src="network.js" type="module"></script>
-    <script src="recherche.js" type="module"></script>
+    <script src="./javaScript/network.js" type="module"></script>
+    <script src="./javaScript/recherche.js" type="module"></script>
 
-    <script>
-        import { loadFullMaster } from './network.js';
-        import { filterMasters } from './recherche.js';
-
-        let formationsById = {};
-
-        // Charger les données au démarrage de la page
-        loadFullMaster().then((data) => {
-            formationsById = data.formationsById;
-        });
-
-        const searchBar = document.getElementById('search-bar');
-        const searchButton = document.getElementById('search-button');
-        const mastersContainer = document.getElementById('masters-container');
-
-        searchButton.addEventListener('click', () => {
-            const query = searchBar.value.trim().toLowerCase();
-            const results = filterMasters(query, formationsById);
-            displayMasters(results);
-        });
-
-        function displayMasters(masters) {
-            mastersContainer.innerHTML = '';
-            masters.forEach(master => {
-                const masterCard = document.createElement('div');
-                masterCard.classList.add('master-card');
-
-                masterCard.innerHTML = `
-                    <h3 class="master-title">${master.nomParcours}</h3>
-                    <p>Établissement: ${master.etablissement}</p>
-                    <p>Ville: ${master.ville}</p>
-                    <p>Alternance: ${master.alternance ? 'Oui' : 'Non'}</p>
-                    <a href="presentationMaster.html?id=${master.id}" class="view-details">Voir les détails</a>
-                `;
-
-                mastersContainer.appendChild(masterCard);
-            });
-        }
-    </script>
 </body>
 </html>

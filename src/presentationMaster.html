@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation du Master</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white">
+    <!-- Header -->
+    <header class="w-full bg-gray-800 p-4 flex items-center justify-between">
+        <div class="w-12 h-12 bg-gray-700 rounded-md"></div> <!-- Emplacement du logo -->
+        <nav class="hidden md:flex space-x-4">
+            <a href="recherche.html" class="hover:text-green-400">Retour</a>
+        </nav>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="p-6">
+        <!-- Titre -->
+        <h1 id="master-name" class="text-3xl font-bold mb-4"></h1>
+
+        <!-- Détails du Master -->
+        <div class="space-y-4">
+            <p id="master-description" class="text-lg"></p>
+            <p id="master-region" class="text-sm"></p>
+            <p id="master-ville" class="text-sm"></p>
+            <p id="master-establishment" class="text-sm"></p>
+            <p id="master-type" class="text-sm"></p>
+        </div>
+
+        <!-- Section statistiques et avis -->
+        <div class="mt-8">
+            <h2 class="text-2xl mb-4">Statistiques & Avis</h2>
+            <div id="master-stats" class="p-4 bg-gray-800 rounded"></div>
+            <div id="master-avis" class="p-4 bg-gray-800 rounded mt-4"></div>
+        </div>
+    </main>
+
+    <!-- Script JS -->
+    <script type="module">
+        import { loadFullMaster } from './javaScript/network.js'; 
+
+        // 1. Récupérer l'ID du Master depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const masterId = urlParams.get('id');
+
+        // 2. Charger les informations du Master
+        async function fetchMasterDetails() {
+            try {
+                const masters = await loadFullMaster();
+                const master = masters.find(m => m.id == masterId);
+
+                if (master) {
+                    document.getElementById('master-name').innerText = master.nom || 'Nom non disponible';
+                    document.getElementById('master-description').innerText = master.description || 'Aucune description';
+                    document.getElementById('master-region').innerText = `Région : ${master.region || 'Non renseigné'}`;
+                    document.getElementById('master-ville').innerText = `Ville : ${master.ville || 'Non renseigné'}`;
+                    document.getElementById('master-establishment').innerText = `Établissement : ${master.etablissement || 'Non renseigné'}`;
+                    document.getElementById('master-type').innerText = `Type : ${master.type || 'Non renseigné'}`;
+                    
+                    // Exemple de statistiques ou avis
+                    document.getElementById('master-stats').innerText = 'Statistiques non disponibles';
+                    document.getElementById('master-avis').innerText = 'Avis non disponibles';
+                } else {
+                    document.body.innerHTML = '<p class="text-center text-red-500">Master non trouvé</p>';
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement des détails du master :', error);
+            }
+        }
+
+        // Exécuter la fonction au chargement de la page
+        fetchMasterDetails();
+    </script>
+</body>
+</html>

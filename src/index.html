@@ -117,29 +117,5 @@
     <!-- Importation des scripts -->
     <script src="./javaScript/network.js" type="module"></script>
     <script src="./javaScript/recherche.js" type="module"></script>
-    <script>
-        // Chargement des masters seulement après une recherche
-        document.getElementById('search-button').addEventListener('click', async () => {
-            const searchBar = document.getElementById('search-bar');
-            const container = document.getElementById('masters-container');
-            container.innerHTML = ""; // Vide le conteneur
-            
-            // Appel API avec le fichier JS
-            const { loadEntities } = await import('./javaScript/network.js');
-            const data = await loadEntities(searchBar.value); // Récupération des données
-
-            // Affichage des données
-            data.forEach(master => {
-                const div = document.createElement('div');
-                div.className = 'master-card';
-                div.innerHTML = `
-                    <div class="master-title">${master.name}</div>
-                    <p>${master.description}</p>
-                    <a href="details.html?id=${master.id}" class="view-details">Voir plus</a>
-                `;
-                container.appendChild(div);
-            });
-        });
-    </script>
 </body>
 </html>

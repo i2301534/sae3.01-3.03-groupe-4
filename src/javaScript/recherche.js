@@ -40,13 +40,22 @@ const masterDiv = document.createElement('div');
 masterDiv.classList.add('master-card');
 // Ajouter les informations du master dans la div
 masterDiv.innerHTML = `
+<div class="relative master-card text-white">
 <h2 class="master-title">${master.parcoursFormation}</h2>
 <p><strong>Alternance:</strong> ${master.alternanceFormation ? 'Oui' : 'Non'}</p>
 <p><strong>Lieu:</strong> ${master.lieuxFormation}</p>
 <p><strong>Ville:</strong> ${master.villeFormation}</p>
 <p><strong>Département:</strong> ${master.deptFormation}</p>
 <p><strong>Établissement:</strong> ${master.etabUaiFormation}</p>
-<a href="presentationMaster.html?id=${master.id}" class="view-details">Voir les détails</a>
+<a href="presentationMaster.html?id=${master.id}" class="view-details pt-4">Voir les détails</a>
+<!-- Bouton Favoris -->
+    <button 
+        class="absolute right-8 text-gray-400 hover:text-green-500 transition-all heart-btn" 
+        data-id="${master.idFormation}"
+        title="Ajouter aux favoris">
+        <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
+    </button>
+</div>
 `;
 // Ajouter la div à la container
 mastersContainer.appendChild(masterDiv);

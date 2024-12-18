@@ -2,20 +2,27 @@ import { loadFullMaster } from "./network.js";
 
 // Fonction pour filtrer les masters selon la recherche
 function filterMasters(query, formationsById) {
-if (!query) return Object.values(formationsById); // Si aucune recherche, retourne toutes les formations
+    if (!query) return Object.values(formationsById); // Si aucune recherche, retourne toutes les formations
 
-query = query.toLowerCase(); // Convertir la recherche en minuscule pour ne pas être sensible à la casse
+    query = query.toLowerCase(); // Convertir la recherche en minuscule pour ne pas être sensible à la casse
 
-return Object.values(formationsById).filter(master => {
-// Filtrer selon plusieurs critères, avec vérification que les propriétés existent
-return (
-(master.parcoursFormation && master.parcoursFormation.toLowerCase().includes(query)) ||
-(master.villeFormation && master.villeFormation.toLowerCase().includes(query)) ||
-(master.etabUaiFormation && master.etabUaiFormation.toLowerCase().includes(query)) ||
-(master.deptFormation && master.deptFormation.toLowerCase().includes(query))
-);
-});
+    return Object.values(formationsById).filter(master => {
+        // Assurez-vous que chaque propriété est une chaîne avant d'appeler toLowerCase
+        const parcours = master.parcoursFormation ? master.parcoursFormation.toLowerCase() : '';
+        const ville = master.villeFormation ? master.villeFormation.toLowerCase() : '';
+        const etab = master.etabUaiFormation ? master.etabUaiFormation.toLowerCase() : '';
+        const dept = master.deptFormation ? String(master.deptFormation).toLowerCase() : ''; // Convertit les nombres en chaînes
+
+        // Filtrer selon plusieurs critères
+        return (
+            parcours.includes(query) ||
+            ville.includes(query) ||
+            etab.includes(query) ||
+            dept.includes(query)
+        );
+    });
 }
+
 
 // Appeler la fonction loadFullMaster pour récupérer les données
 loadFullMaster().then((data) => {
@@ -67,6 +74,21 @@ searchButton.addEventListener('click', () => {
 const query = searchBar.value.trim(); // Récupérer la valeur de la recherche
 updateDisplay(query); // Mettre à jour les masters affichés
 });
+
+function updateDisplayAdvanced(filters) {
+    mastersContainer.innerHTML = ''; // Efface le contenu précédent
+    const filteredMasters = Object.values(formationsById).filter(master => {
+        return (!filters.formation || master.parcoursFormation.toLowerCase().includes(filters.formation.toLowerCase())) &&
+               (!filters.region || master.regionFormation.toLowerCase().includes(filters.region.toLowerCase())) &&
+               (!filters.departement || master.deptFormation.includes(filters.departement)) &&
+               (!filters.ville || master.villeFormation.toLowerCase().includes(filters.ville.toLowerCase())) &&
+               (!filters.alternance || master.alternanceFormation === true);
+    });
+
+    filteredMasters.forEach(master => { 
+        // Ton code d'affichage existant ici
+    });
+}
 
 
 }).catch((error) => {

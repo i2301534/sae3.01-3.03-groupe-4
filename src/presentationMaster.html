@@ -3,39 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation du Master</title>
+    <title>Master Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black text-white">
     <!-- Header -->
-    <header class="w-full bg-gray-800 p-4 flex items-center justify-between">
-        <div class="w-12 h-12 bg-gray-700 rounded-md"></div> <!-- Emplacement du logo -->
-        <nav class="hidden md:flex space-x-4">
-            <a href="recherche.html" class="hover:text-green-400">Retour</a>
+    <div class="flex flex-col text-xl font-bold">
+        <!-- Desktop Version -->
+        <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
+          <!-- Accueil -->
+          <a href="index.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
+            <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
+            <span>Accueil</span>
+          </a>
+        
+          <!-- Favoris -->
+          <a href="favoris.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+            <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-6 w-6" />
+            <span>Favoris</span>
+          </a>
+        
+          <!-- Statistiques -->
+          <a href="statistiques.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+            <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-6 w-6" />
+            <span>Statistiques</span>
+          </a>
         </nav>
-    </header>
+    </div>
 
-    <!-- Contenu principal -->
+    <!-- Main Section -->
     <main class="p-6">
-        <!-- Titre -->
-        <h1 id="master-name" class="text-3xl font-bold mb-4"></h1>
+        <!-- Image & Tabs -->
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Image Section -->
+            <div class="flex flex-col items-center">
+                <img src="https://via.placeholder.com/300x200" alt="Etablissement" class="rounded-md mb-4">
+                <div class="text-center">
+                    <button class="bg-gray-700 py-2 px-4 rounded mb-2 font-semibold">Etablissement</button>
+                    <div class="flex gap-2">
+                        <button class="bg-gray-700 py-2 px-4 rounded">Académie</button>
+                        <button class="bg-gray-700 py-2 px-4 rounded">Région</button>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Détails du Master -->
-        <div class="space-y-4">
-            <p id="master-description" class="text-lg"></p>
-            <p id="master-region" class="text-sm"></p>
-            <p id="master-ville" class="text-sm"></p>
-            <p id="master-establishment" class="text-sm"></p>
-            <p id="master-type" class="text-sm"></p>
-        </div>
+            <!-- Dynamic Content -->
+            <div class="w-full">
+                <!-- Tabs -->
+                <div id="tabs" class="flex gap-4 mb-6">
+                    <button id="tab-formation" class="tab-btn bg-gray-600 py-2 px-4 rounded hover:bg-gray-500">Formation</button>
+                    <button id="tab-candidatures" class="tab-btn bg-gray-600 py-2 px-4 rounded hover:bg-gray-500">Candidatures</button>
+                    <button id="tab-avis" class="tab-btn bg-gray-600 py-2 px-4 rounded hover:bg-gray-500">Avis</button>
+                </div>
 
-        <!-- Section statistiques et avis -->
-        <div class="mt-8">
-            <h2 class="text-2xl mb-4">Statistiques & Avis</h2>
-            <div id="master-stats" class="p-4 bg-gray-800 rounded"></div>
-            <div id="master-avis" class="p-4 bg-gray-800 rounded mt-4"></div>
+                <!-- Tab Content -->
+                <div id="tab-content" class="space-y-6">
+                    <div id="content-formation" class="hidden">
+                        <h2 class="text-2xl font-bold mb-2">Titre</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                    </div>
+                    <div id="content-candidatures" class="hidden">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center bg-gray-800 p-4 rounded">
+                                <span>Nombre de candidatures</span>
+                                <span class="bg-gray-700 py-1 px-3 rounded">##</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-800 p-4 rounded">
+                                <span>Nombre de candidatures en liste d'attente :</span>
+                                <span class="bg-gray-700 py-1 px-3 rounded">##</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-800 p-4 rounded">
+                                <span>Nombre de candidatures acceptées :</span>
+                                <span class="bg-gray-700 py-1 px-3 rounded">##</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content-avis" class="hidden">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-2">
+                                <div class="text-green-400">★★★★★</div>
+                                <p class="bg-gray-800 p-4 rounded w-full">Lorem ipsum dolor sit amet...</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="text-green-400">★★★★☆</div>
+                                <p class="bg-gray-800 p-4 rounded w-full">Lorem ipsum dolor sit amet...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <!-- Mobile Version -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
+        <!-- Accueil -->
+        <a href="index.html" class="flex flex-col items-center">
+          <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+            <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-8 w-8" />
+          </div>
+        </a>
+      
+        <!-- Favoris -->
+        <a href="favoris.html" class="flex flex-col items-center">
+          <div class="h-16 w-16 bg-green-700 rounded-full flex items-center justify-center">
+            <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
+          </div>
+        </a>
+      
+        <!-- Statistiques -->
+        <a href="statistiques.html" class="flex flex-col items-center">
+          <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+            <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-8 w-8" />
+          </div>
+        </a>
+    </nav>
+
+    <!-- Script -->
+    <script>
+        // Tabs Logic
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = {
+            'tab-formation': document.getElementById('content-formation'),
+            'tab-candidatures': document.getElementById('content-candidatures'),
+            'tab-avis': document.getElementById('content-avis'),
+        };
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                Object.values(contents).forEach(c => c.classList.add('hidden'));
+                contents[tab.id].classList.remove('hidden');
+            });
+        });
+
+        // Default tab
+        document.getElementById('tab-formation').click();
+    </script>
+
 
     <!-- Script JS -->
     <script type="module">

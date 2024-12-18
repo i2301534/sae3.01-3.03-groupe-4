@@ -75,37 +75,40 @@
   <main class="flex flex-col items-center justify-center pt-20 text-center">
     <!-- Logo -->
     <div class="flex items-center justify-center mb-6">
-      <div class="bg-gray-700 p-6 rounded-lg flex items-center justify-center">
+      <div class="p-6 rounded-lg flex items-center justify-center">
         <img src="./Images/logo.png" alt="logo" class="h-50 w-50" />
       </div>
     </div>
 
     <!-- Titre principal -->
     <h1 class="text-3xl font-bold mb-4">Qu’est ce que Masterclass ?</h1>
-    <p class="text-gray-400 px-4 md:px-0 mb-6">
-      Notre application de recherche de Master simplifie la découverte des formations en 
+    <p class="text-gray-400 px-4 md:px-0 mb-6 mx-72">
+      Masterclass simplifie la découverte des formations en 
       permettant aux étudiants de filtrer les résultats par nom, ville, ou établissement. 
       Intuitive et moderne, elle offre une navigation fluide pour trouver rapidement le Master idéal adapté à vos besoins académiques et professionnels.
     </p>
 
     <div class="w-full md:w-3/4" style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-      <h1 class="text-2xl font-bold text-center mb-4">Rechercher un Master</h1>
       
       <!-- Barre de recherche -->
-      <div class="flex items-center mb-6">
-          <input
-              type="text"
-              id="search-bar"
-              placeholder="Rechercher un Master par nom, ville ou établissement..."
-              class="w-full p-3 rounded-l-lg"
-              style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
-          />
+      <div class="justify-center items-center mb-6">
+        <input
+            type="text"
+            id="search-bar"
+            placeholder="Rechercher un Master par nom, ville ou établissement..."
+            class="w-1/2 p-3 rounded-xl"
+            style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
+        />
+
+        <div class="pt-5">
           <button
               id="search-button"
-              class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-r-lg">
-              🔍
+              class="bg-green-500 hover:bg-green-600 p-3 rounded-full text-white">
+              <img src="./Images/icon/search.svg" alt="logo" class="h-10 w-10" />
           </button>
       </div>
+      
+    </div>
 
       <!-- Liste des Masters -->
       <div id="masters-container" class="mt-4"></div>

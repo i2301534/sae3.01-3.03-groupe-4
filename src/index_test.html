@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recherche - NaMaster</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --black-custom: #000000;
+      /* Noir complet */
+      --gray-custom: #1c1c1c;
+      /* Gris sombre */
+    }
+
+    .master-card {
+      background-color: var(--gray-custom);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .master-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .view-details {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #10B981;
+      /* Vert Tailwind */
+      text-decoration: none;
+    }
+
+    .view-details:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body class="bg-black text-white m-0 p-0">
+
+  <!-- Header -->
+  <div class="flex flex-col text-xl font-bold">
+    <!-- Desktop Version -->
+    <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
+      <!-- Accueil -->
+      <a href="index.html"
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
+        <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
+        <span>Accueil</span>
+      </a>
+
+      <!-- Favoris -->
+      <a href="favoris.html"
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+        <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-6 w-6" />
+        <span>Favoris</span>
+      </a>
+
+      <!-- Statistiques -->
+      <a href="statistiques.html"
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+        <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-6 w-6" />
+        <span>Statistiques</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex flex-col items-center justify-center min-h-screen text-center">
+    <!-- Logo -->
+    <div class="flex items-center justify-center mb-6">
+      <div class="bg-gray-700 p-6 rounded-lg flex items-center justify-center">
+        <span class="text-8xl font-bold leading-none">M</span>
+      </div>
+    </div>
+
+    <!-- Titre principal -->
+    <h1 class="text-3xl font-bold mb-4">Qu’est ce que Masterclass ?</h1>
+    <p class="text-gray-400 px-4 md:px-0 mb-6">
+      Lorem ipsum dolor sit amet. Nam nulla modi ut provident exercitationem vel natus reprehenderit et cumque
+      blanditiis.
+    </p>
+  </main>
+</body>
+
+</html>

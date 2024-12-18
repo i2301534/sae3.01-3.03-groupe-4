@@ -50,7 +50,7 @@
     <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
       <!-- Accueil -->
       <a href="index.html"
-        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-600 text-white hover:bg-green-600">
         <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
         <span>Accueil</span>
       </a>
@@ -82,7 +82,7 @@
 
     <!-- Titre principal -->
     <h1 class="text-3xl font-bold mb-4">Qu’est ce que Masterclass ?</h1>
-    <p class="text-gray-400 px-4 md:px-0 mb-6 mx-72">
+    <p class="text-gray-400 px-4 md:px-0 mb-6 max-w-3xl">
       Masterclass simplifie la découverte des formations en 
       permettant aux étudiants de filtrer les résultats par nom, ville, ou établissement. 
       Intuitive et moderne, elle offre une navigation fluide pour trouver rapidement le Master idéal adapté à vos besoins académiques et professionnels.
@@ -96,14 +96,14 @@
             type="text"
             id="search-bar"
             placeholder="Rechercher un Master par nom, ville ou établissement..."
-            class="w-1/2 p-3 rounded-xl"
+            class="w-3/4 md:w-full p-3 rounded-2xl"
             style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
         />
 
         <div class="pt-5">
           <button
               id="search-button"
-              class="bg-green-500 hover:bg-green-600 p-3 rounded-full">
+              class="bg-green-600 hover:bg-green-600 p-3 rounded-full">
               <img src="./Images/icon/search.svg" alt="logo" class="h-10 w-10" />
           </button>
       </div>
@@ -114,6 +114,31 @@
       <div id="masters-container" class="mt-4"></div>
   </div>
   </main>
+   <!-- Footer -->
+    <!-- Mobile Version -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
+      <!-- Accueil -->
+      <a href="index.html" class="flex flex-col items-center">
+        <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+          <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-8 w-8" />
+        </div>
+      </a>
+    
+      <!-- Favoris -->
+      <a href="favoris.html" class="flex flex-col items-center">
+        <div class="h-16 w-16 bg-green-600 rounded-full flex items-center justify-center">
+          <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
+        </div>
+      </a>
+    
+      <!-- Statistiques -->
+      <a href="statistiques.html" class="flex flex-col items-center">
+        <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+          <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-8 w-8" />
+        </div>
+      </a>
+  </nav>
 </body>
+
 
 </html>

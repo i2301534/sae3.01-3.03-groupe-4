@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recherche - NaMaster</title>
+  <title>Accueil - NaMaster</title>
+  <link rel="icon" type="image/png" href="./Images/favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
@@ -50,7 +51,7 @@
     <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
       <!-- Accueil -->
       <a href="index.html"
-        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-600 text-white hover:bg-green-600">
         <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
         <span>Accueil</span>
       </a>
@@ -72,45 +73,73 @@
   </div>
 
   <!-- Main Content -->
-  <main class="flex flex-col items-center justify-center pt-20 text-center">
+  <main class="flex flex-col items-center justify-center pt-10 text-center">
     <!-- Logo -->
     <div class="flex items-center justify-center mb-6">
-      <div class="bg-gray-700 p-6 rounded-lg flex items-center justify-center">
+      <div class="p-6 rounded-lg flex items-center justify-center">
         <img src="./Images/logo.png" alt="logo" class="h-50 w-50" />
       </div>
     </div>
 
     <!-- Titre principal -->
     <h1 class="text-3xl font-bold mb-4">Qu’est ce que Masterclass ?</h1>
-    <p class="text-gray-400 px-4 md:px-0 mb-6">
-      Notre application de recherche de Master simplifie la découverte des formations en 
+    <p class="text-gray-400 px-4 md:px-0 mb-6 max-w-6xl">
+      Masterclass simplifie la découverte des formations en 
       permettant aux étudiants de filtrer les résultats par nom, ville, ou établissement. 
       Intuitive et moderne, elle offre une navigation fluide pour trouver rapidement le Master idéal adapté à vos besoins académiques et professionnels.
     </p>
 
     <div class="w-full md:w-3/4" style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-      <h1 class="text-2xl font-bold text-center mb-4">Rechercher un Master</h1>
       
       <!-- Barre de recherche -->
-      <div class="flex items-center mb-6">
-          <input
-              type="text"
-              id="search-bar"
-              placeholder="Rechercher un Master par nom, ville ou établissement..."
-              class="w-full p-3 rounded-l-lg"
-              style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
-          />
+      <div class="justify-center items-center mb-6">
+        <input
+            type="text"
+            id="search-bar"
+            placeholder=" Rechercher un Master par nom, ville ou établissement..."
+            class="w-4/5 p-3 rounded-full"
+            style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
+        />
+
+        <div class="pt-5">
           <button
               id="search-button"
-              class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-r-lg">
-              🔍
+              class="bg-green-600 hover:bg-green-600 p-3 rounded-full">
+              <img src="./Images/icon/search.svg" alt="logo" class="h-10 w-10" />
           </button>
       </div>
+      
+    </div>
 
       <!-- Liste des Masters -->
       <div id="masters-container" class="mt-4"></div>
   </div>
   </main>
+   <!-- Footer -->
+    <!-- Mobile Version -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
+      <!-- Accueil -->
+      <a href="index.html" class="flex flex-col items-center">
+        <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+          <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-8 w-8" />
+        </div>
+      </a>
+    
+      <!-- Favoris -->
+      <a href="favoris.html" class="flex flex-col items-center">
+        <div class="h-16 w-16 bg-green-600 rounded-full flex items-center justify-center">
+          <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
+        </div>
+      </a>
+    
+      <!-- Statistiques -->
+      <a href="statistiques.html" class="flex flex-col items-center">
+        <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+          <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-8 w-8" />
+        </div>
+      </a>
+  </nav>
 </body>
+
 
 </html>

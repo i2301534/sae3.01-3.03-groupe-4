@@ -1,121 +1,188 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recherche - NaMaster</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --black-custom: #000000; /* Noir complet */
-            --gray-custom: #1c1c1c; /* Gris sombre */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recherche - NaMaster</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --black-custom: #000000;
+      --gray-custom: #1c1c1c;
+    }
 
-        .master-card {
-            background-color: var(--gray-custom);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
+    .master-card {
+      background-color: var(--gray-custom);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
 
-        .master-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
+    .master-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
 
-        .view-details {
-            display: inline-block;
-            margin-top: 0.5rem;
-            color: #10B981; /* Vert Tailwind */
-            text-decoration: none;
-        }
+    .view-details {
+      color: #10B981;
+    }
 
-        .view-details:hover {
-            text-decoration: underline;
-        }
-    </style>
+    #advanced-search-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #advanced-search-modal .modal-content {
+      background-color: var(--gray-custom);
+      padding: 2rem;
+      border-radius: 0.5rem;
+      width: 90%;
+      max-width: 500px;
+    }
+  </style>
 </head>
-<body class="bg-black text-white m-0 p-0">
+
+<body class="bg-black text-white">
 
   <!-- Header -->
-    <div class="flex flex-col text-xl font-bold">
-        <!-- Desktop Version -->
-        <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
-          <!-- Accueil -->
-          <a href="index.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
-            <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
-            <span>Accueil</span>
-          </a>
-        
-          <!-- Favoris -->
-          <a href="favoris.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
-            <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-6 w-6" />
-            <span>Favoris</span>
-          </a>
-        
-          <!-- Statistiques -->
-          <a href="statistiques.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
-            <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-6 w-6" />
-            <span>Statistiques</span>
-          </a>
-        </nav>
+  <div class="flex flex-col text-xl font-bold">
+    <!-- Desktop Version -->
+    <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
+      <!-- Accueil -->
+      <a href="index.html"
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
+        <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
+        <span>Accueil</span>
+      </a>
+
+      <!-- Favoris -->
+      <a href="favoris.html"
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+        <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-6 w-6" />
+        <span>Favoris</span>
+      </a>
+
+      <!-- Statistiques -->
+      <a href="statistiques.html"
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+        <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-6 w-6" />
+        <span>Statistiques</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex flex-col items-center justify-center pt-5 text-center">
+    <!-- Logo -->
+    <div class="flex items-center justify-center mb-6">
+      <div class="p-6 rounded-lg flex items-center justify-center">
+        <img src="./Images/logo.png" alt="logo" class="h-50 w-50" />
+      </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="w-full md:flex md:justify-center md:items-center mt-0">
-        <div class="w-full md:w-3/4" style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-            <h1 class="text-2xl font-bold text-center mb-4">Rechercher un Master</h1>
-            
-            <!-- Barre de recherche -->
-            <div class="flex items-center mb-6">
-                <input
-                    type="text"
-                    id="search-bar"
-                    placeholder="Rechercher un Master par nom, ville ou établissement..."
-                    class="w-full p-3 rounded-l-lg"
-                    style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
-                />
-                <button
-                    id="search-button"
-                    class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-r-lg">
-                    🔍
-                </button>
-            </div>
+    <!-- Titre principal -->
+    <h1 class="text-3xl font-bold mb-4">Qu’est ce que NaMaster ?</h1>
+    <p class="text-gray-400 px-4 max-w-5xl">
+      NaMaster simplifie la découverte des formations en
+      permettant aux étudiants de filtrer les résultats par nom, ville, ou établissement.
+      Intuitive et moderne, elle offre une navigation fluide pour trouver rapidement le Master idéal adapté à vos
+      besoins académiques et professionnels.
+    </p>
 
-            <!-- Liste des Masters -->
-            <div id="masters-container" class="mt-4"></div>
+    <div class="w-full md:w-3/4"
+      style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+
+      <!-- Barre de recherche -->
+      <div class="justify-center items-center mb-6">
+        <input type="text" id="search-bar" placeholder=" Rechercher un Master par nom, ville ou établissement..."
+          class="w-4/5 p-3 rounded-full"
+          style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);" />
+
+        <button id="open-advanced-search" class="bg-gray-700 hover:bg-green-500 text-white px-4 py-2 m-6 rounded-full"
+          style="background-color: var(--gray-custom);">Recherche
+          Avancée</button>
+
+        <div>
+          <button id="search-button" class="bg-green-600 hover:bg-green-600 p-3 rounded-full">
+            <img src="./Images/icon/search.svg" alt="logo" class="h-10 w-10" />
+          </button>
         </div>
-    </main>
+
+        <div id="masters-container" class="mt-4 text-left"></div>
+      </div>
+  </main>
+
+  <!-- Pop-up Recherche Avancée -->
+  <div id="advanced-search-modal">
+    <div class="modal-content">
+      <h2 class="text-2xl font-bold mb-4">Recherche Avancée</h2>
+      <form id="advanced-search-form" class="space-y-4">
+        <div>
+          <label for="formation">Formation</label>
+          <select id="formation" class="w-full p-2 bg-black text-white rounded">
+            <option value="">-- Choisir une Formation --</option>
+          </select>
+        </div>
+        <div>
+          <label for="region">Région</label>
+          <select id="region" class="w-full p-2 bg-black text-white rounded">
+            <option value="">-- Choisir une Région --</option>
+          </select>
+        </div>
+        <div>
+          <label for="departement">Département</label>
+          <select id="departement" class="w-full p-2 bg-black text-white rounded">
+            <option value="">-- Choisir un Département --</option>
+          </select>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" id="alternance"> Alternance
+          </label>
+        </div>
+        <div class="flex justify-end">
+          <button type="button" id="close-advanced-search" class="bg-gray-500 px-4 py-2 rounded">Annuler</button>
+          <button type="submit" class="bg-green-600 px-4 py-2 rounded">Rechercher</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Footer -->
-    <!-- Mobile Version -->
-    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
-        <!-- Accueil -->
-        <a href="index.html" class="flex flex-col items-center">
-          <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
-            <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-8 w-8" />
-          </div>
-        </a>
-      
-        <!-- Favoris -->
-        <a href="favoris.html" class="flex flex-col items-center">
-          <div class="h-16 w-16 bg-green-700 rounded-full flex items-center justify-center">
-            <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
-          </div>
-        </a>
-      
-        <!-- Statistiques -->
-        <a href="statistiques.html" class="flex flex-col items-center">
-          <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
-            <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-8 w-8" />
-          </div>
-        </a>
-    </nav>
+  <!-- Mobile Version -->
+  <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
+    <!-- Accueil -->
+    <a href="index.html" class="flex flex-col items-center">
+      <div class="h-16 w-16 bg-green-700 rounded-full flex items-center justify-center">
+        <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-8 w-8" />
+      </div>
+    </a>
 
-    <!-- Importation des scripts -->
-    <script src="./javaScript/network.js" type="module"></script>
-    <script src="./javaScript/recherche.js" type="module"></script>
+    <!-- Favoris -->
+    <a href="favoris.html" class="flex flex-col items-center">
+      <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+        <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
+      </div>
+    </a>
+
+    <!-- Statistiques -->
+    <a href="statistiques.html" class="flex flex-col items-center">
+      <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+        <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-8 w-8" />
+      </div>
+    </a>
+  </nav>
+
+  <script src="./javaScript/network.js" type="module"></script>
+  <script src="./javaScript/recherche.js" type="module"></script>
 </body>
+
 </html>

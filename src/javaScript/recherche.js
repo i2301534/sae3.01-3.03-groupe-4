@@ -6,16 +6,41 @@ const closeModal = document.getElementById("close-advanced-search");
 const modal = document.getElementById("advanced-search-modal");
 
 const formationSelect = document.getElementById("formation");
-const regionSelect = document.getElementById("region");
+const villeSelect = document.getElementById("ville");
 const departementSelect = document.getElementById("departement");
+const alternanceCheckbox = document.getElementById("alternance");
+
+const searchBar = document.getElementById("search-bar");
+const searchButton = document.getElementById("search-button");
+
+const DEPARTEMENTS = {
+    "01": "Ain", "02": "Aisne", "03": "Allier", "04": "Alpes-de-Haute-Provence", "05": "Hautes-Alpes", "06": "Alpes-Maritimes", 
+    "07": "Ardèche", "08": "Ardennes", "09": "Ariège", "10": "Aube", "11": "Aude", "12": "Aveyron", "13": "Bouches-du-Rhône", 
+    "14": "Calvados", "15": "Cantal", "16": "Charente", "17": "Charente-Maritime", "18": "Cher", "19": "Corrèze", 
+    "2A": "Corse-du-Sud", "2B": "Haute-Corse", "21": "Côte-d'Or", "22": "Côtes-d'Armor", "23": "Creuse", "24": "Dordogne", 
+    "25": "Doubs", "26": "Drôme", "27": "Eure", "28": "Eure-et-Loir", "29": "Finistère", "30": "Gard", 
+    "31": "Haute-Garonne", "32": "Gers", "33": "Gironde", "34": "Hérault", "35": "Ille-et-Vilaine", "36": "Indre", 
+    "37": "Indre-et-Loire", "38": "Isère", "39": "Jura", "40": "Landes", "41": "Loir-et-Cher", "42": "Loire", 
+    "43": "Haute-Loire", "44": "Loire-Atlantique", "45": "Loiret", "46": "Lot", "47": "Lot-et-Garonne", "48": "Lozère", 
+    "49": "Maine-et-Loire", "50": "Manche", "51": "Marne", "52": "Haute-Marne", "53": "Mayenne", "54": "Meurthe-et-Moselle", 
+    "55": "Meuse", "56": "Morbihan", "57": "Moselle", "58": "Nièvre", "59": "Nord", "60": "Oise", 
+    "61": "Orne", "62": "Pas-de-Calais", "63": "Puy-de-Dôme", "64": "Pyrénées-Atlantiques", "65": "Hautes-Pyrénées", "66": "Pyrénées-Orientales", 
+    "67": "Bas-Rhin", "68": "Haut-Rhin", "69": "Rhône", "70": "Haute-Saône", "71": "Saône-et-Loire", "72": "Sarthe", 
+    "73": "Savoie", "74": "Haute-Savoie", "75": "Paris", "76": "Seine-Maritime", "77": "Seine-et-Marne", "78": "Yvelines", 
+    "79": "Deux-Sèvres", "80": "Somme", "81": "Tarn", "82": "Tarn-et-Garonne", "83": "Var", "84": "Vaucluse", 
+    "85": "Vendée", "86": "Vienne", "87": "Haute-Vienne", "88": "Vosges", "89": "Yonne", "90": "Territoire de Belfort", 
+    "91": "Essonne", "92": "Hauts-de-Seine", "93": "Seine-Saint-Denis", "94": "Val-de-Marne", "95": "Val-d'Oise", 
+    "971": "Guadeloupe", "972": "Martinique", "973": "Guyane", "974": "La Réunion", "976": "Mayotte"
+};
+
 
 let allMasters = [];
 let filtersInitialized = false;
 
-// Ouvrir le pop-up instantanément
+// Ouvrir le pop-up de recherche avancée
 openModal.addEventListener("click", () => {
     modal.style.display = "flex";
-    if (!filtersInitialized) loadFilters(); // Charger les filtres si non initialisés
+    if (!filtersInitialized) loadFilters(); // Charger les filtres dynamiquement
 });
 
 // Fermer le pop-up
@@ -23,16 +48,19 @@ closeModal.addEventListener("click", () => {
     modal.style.display = "none";
 });
 
-// Charger dynamiquement les filtres
+// Charger les filtres dynamiquement dans les menus déroulants
 async function loadFilters() {
     try {
         const data = await loadFullMaster();
         allMasters = Object.values(data.formationsById);
 
-        // Remplir les filtres dynamiquement
+        // Remplir les menus déroulants avec des valeurs uniques
         populateSelect(formationSelect, [...new Set(allMasters.map(m => m.parcoursFormation))]);
-        populateSelect(regionSelect, [...new Set(allMasters.map(m => m.regionFormation))]);
-        populateSelect(departementSelect, [...new Set(allMasters.map(m => m.deptFormation))]);
+        populateSelect(villeSelect, [...new Set(allMasters.map(m => m.villeFormation))]);
+
+        // Convertir les numéros de département en noms de départements sous la forme "Numéro - Nom"
+        const departements = Object.entries(DEPARTEMENTS).map(([code, name]) => `${code} - ${name}`);
+        populateSelect(departementSelect, departements);
 
         filtersInitialized = true;
     } catch (error) {
@@ -45,10 +73,46 @@ function populateSelect(selectElement, items) {
     items.forEach(item => {
         if (item) {
             const option = document.createElement("option");
-            option.value = item;
-            option.textContent = item;
+            option.value = item; // On met la valeur brute
+            option.textContent = item; // Le texte visible
             selectElement.appendChild(option);
         }
+    });
+}
+
+// Mise à jour de l'affichage des Masters
+function updateMastersDisplay(masters) {
+    mastersContainer.innerHTML = ""; // Efface le contenu précédent
+    if (masters.length === 0) {
+        mastersContainer.innerHTML = "<p>Aucune formation trouvée.</p>";
+        return;
+    }
+
+    masters.forEach(master => {
+        const masterDiv = document.createElement("div");
+        masterDiv.classList.add("master-card");
+        masterDiv.innerHTML = `
+            <div class="relative master-card text-white">
+                <h2 class="master-title">${master.parcoursFormation}</h2>
+                <p><strong>Ville:</strong> ${master.villeFormation}</p>
+                <p><strong>Département:</strong> ${master.deptFormation} - ${DEPARTEMENTS[master.deptFormation] || master.deptFormation}</p>
+                <p><strong>Alternance:</strong> ${master.alternanceFormation ? "Oui" : "Non"}</p>
+                <p><strong>Établissement:</strong> ${master.etabUaiFormation}</p>
+                <a href="presentationMaster.html?id=${master.id}" class="view-details pt-4">Voir les détails</a>
+            </div>
+        `;
+        mastersContainer.appendChild(masterDiv);
+    });
+}
+
+// Filtrer les masters selon les critères avancés
+function filterMastersAdvanced(filters) {
+    return allMasters.filter(master => {
+        const deptDisplay = `${master.deptFormation} - ${DEPARTEMENTS[master.deptFormation] || ''}`;
+        return (!filters.formation || master.parcoursFormation === filters.formation) &&
+               (!filters.ville || master.villeFormation === filters.ville) &&
+               (!filters.departement || deptDisplay === filters.departement) &&
+               (!filters.alternance || master.alternanceFormation === true);
     });
 }
 
@@ -58,107 +122,27 @@ document.getElementById("advanced-search-form").addEventListener("submit", (e) =
 
     const filters = {
         formation: formationSelect.value,
-        region: regionSelect.value,
+        ville: villeSelect.value,
         departement: departementSelect.value,
-        alternance: document.getElementById("alternance").checked
+        alternance: alternanceCheckbox.checked
     };
 
-    const filteredMasters = filterMasters(filters);
+    const filteredMasters = filterMastersAdvanced(filters);
     updateMastersDisplay(filteredMasters);
     modal.style.display = "none"; // Fermer le pop-up
 });
 
-// Fonction pour filtrer les masters selon la recherche
-function filterMasters(query, formationsById) {
-    if (!query) return Object.values(formationsById); // Si aucune recherche, retourne toutes les formations
+// Gestion de la recherche manuelle
+searchButton.addEventListener("click", () => {
+    const query = searchBar.value.trim(); // Récupérer la valeur de la recherche
+    const filteredMasters = filterMastersManual(query);
+    updateMastersDisplay(filteredMasters);
+});
 
-    query = query.toLowerCase(); // Convertir la recherche en minuscule pour ne pas être sensible à la casse
-
-    return Object.values(formationsById).filter(master => {
-        // Assurez-vous que chaque propriété est une chaîne avant d'appeler toLowerCase
-        const parcours = master.parcoursFormation ? master.parcoursFormation.toLowerCase() : '';
-        const ville = master.villeFormation ? master.villeFormation.toLowerCase() : '';
-        const etab = master.etabUaiFormation ? master.etabUaiFormation.toLowerCase() : '';
-        const dept = master.deptFormation ? String(master.deptFormation).toLowerCase() : ''; // Convertit les nombres en chaînes
-
-        // Filtrer selon plusieurs critères
-        return (
-            parcours.includes(query) ||
-            ville.includes(query) ||
-            etab.includes(query) ||
-            dept.includes(query)
-        );
-    });
-}
-
-
-// Appeler la fonction loadFullMaster pour récupérer les données
+// Charger toutes les données au démarrage
 loadFullMaster().then((data) => {
-const formationsById = data.formationsById;
-
-const mastersContainer = document.getElementById('masters-container');
-const searchBar = document.getElementById('search-bar');
-const searchButton = document.getElementById('search-button'); // Récupérer le bouton
-// Afficher tous les masters initialement
-function updateDisplay(query = '') {
-mastersContainer.innerHTML = ''; // Effacer le contenu précédent
-const filteredMasters = filterMasters(query, formationsById);
-// Si aucune formation ne correspond, afficher un message
-if (filteredMasters.length === 0) {
-mastersContainer.innerHTML = '<p>Aucune formation trouvée.</p>';
-return;
-}
-// Parcourir les masters filtrés et afficher leurs informations
-filteredMasters.forEach(master => {
-// Créer une div pour chaque master
-const masterDiv = document.createElement('div');
-masterDiv.classList.add('master-card');
-// Ajouter les informations du master dans la div
-masterDiv.innerHTML = `
-<div class="relative master-card text-white">
-<h2 class="master-title">${master.parcoursFormation}</h2>
-<p><strong>Alternance:</strong> ${master.alternanceFormation ? 'Oui' : 'Non'}</p>
-<p><strong>Lieu:</strong> ${master.lieuxFormation}</p>
-<p><strong>Ville:</strong> ${master.villeFormation}</p>
-<p><strong>Département:</strong> ${master.deptFormation}</p>
-<p><strong>Établissement:</strong> ${master.etabUaiFormation}</p>
-<a href="presentationMaster.html?id=${master.id}" class="view-details pt-4">Voir les détails</a>
-<!-- Bouton Favoris -->
-    <button 
-        class="absolute right-8 text-gray-400 hover:text-green-500 transition-all heart-btn" 
-        data-id="${master.idFormation}"
-        title="Ajouter aux favoris">
-        <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
-    </button>
-</div>
-`;
-// Ajouter la div à la container
-mastersContainer.appendChild(masterDiv);
-});
-}
-
-// Mettre à jour l'affichage lorsque l'on clique sur le bouton de recherche
-searchButton.addEventListener('click', () => {
-const query = searchBar.value.trim(); // Récupérer la valeur de la recherche
-updateDisplay(query); // Mettre à jour les masters affichés
-});
-
-function updateDisplayAdvanced(filters) {
-    mastersContainer.innerHTML = ''; // Efface le contenu précédent
-    const filteredMasters = Object.values(formationsById).filter(master => {
-        return (!filters.formation || master.parcoursFormation.toLowerCase().includes(filters.formation.toLowerCase())) &&
-               (!filters.region || master.regionFormation.toLowerCase().includes(filters.region.toLowerCase())) &&
-               (!filters.departement || master.deptFormation.includes(filters.departement)) &&
-               (!filters.ville || master.villeFormation.toLowerCase().includes(filters.ville.toLowerCase())) &&
-               (!filters.alternance || master.alternanceFormation === true);
-    });
-
-    filteredMasters.forEach(master => { 
-        // Ton code d'affichage existant ici
-    });
-}
-
-
+    allMasters = Object.values(data.formationsById);
+    // updateMastersDisplay(allMasters); // Afficher tous les Masters initialement
 }).catch((error) => {
-console.error("Erreur de chargement des données :", error);
+    console.error("Erreur de chargement des données :", error);
 });

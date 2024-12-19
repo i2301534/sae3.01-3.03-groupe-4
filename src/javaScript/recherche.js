@@ -33,7 +33,6 @@ const DEPARTEMENTS = {
     "971": "Guadeloupe", "972": "Martinique", "973": "Guyane", "974": "La Réunion", "976": "Mayotte"
 };
 
-
 let allMasters = [];
 let filtersInitialized = false;
 
@@ -58,7 +57,6 @@ async function loadFilters() {
         populateSelect(formationSelect, [...new Set(allMasters.map(m => m.parcoursFormation))]);
         populateSelect(villeSelect, [...new Set(allMasters.map(m => m.villeFormation))]);
 
-        // Convertir les numéros de département en noms de départements sous la forme "Numéro - Nom"
         const departements = Object.entries(DEPARTEMENTS).map(([code, name]) => `${code} - ${name}`);
         populateSelect(departementSelect, departements);
 
@@ -68,21 +66,20 @@ async function loadFilters() {
     }
 }
 
-// Fonction pour remplir un menu déroulant
 function populateSelect(selectElement, items) {
     items.forEach(item => {
         if (item) {
             const option = document.createElement("option");
-            option.value = item; // On met la valeur brute
-            option.textContent = item; // Le texte visible
+            option.value = item; 
+            option.textContent = item; 
             selectElement.appendChild(option);
         }
     });
 }
 
-// Mise à jour de l'affichage des Masters
+// Met à jour l'affichage des Masters
 function updateMastersDisplay(masters) {
-    mastersContainer.innerHTML = ""; // Efface le contenu précédent
+    mastersContainer.innerHTML = ""; 
     if (masters.length === 0) {
         mastersContainer.innerHTML = "<p>Aucune formation trouvée.</p>";
         return;
@@ -105,7 +102,7 @@ function updateMastersDisplay(masters) {
     });
 }
 
-// Filtrer les masters selon les critères avancés
+// Filtrer les masters selon la recherche avancée
 function filterMastersAdvanced(filters) {
     return allMasters.filter(master => {
         const deptDisplay = `${master.deptFormation} - ${DEPARTEMENTS[master.deptFormation] || ''}`;
@@ -116,7 +113,20 @@ function filterMastersAdvanced(filters) {
     });
 }
 
-// Gestion de la soumission de la recherche avancée
+// **Filtrer les masters avec la recherche manuelle**
+function filterMastersManual(query) {
+    query = query.toLowerCase();
+    return allMasters.filter(master => {
+        const parcours = master.parcoursFormation ? master.parcoursFormation.toLowerCase() : "";
+        const ville = master.villeFormation ? master.villeFormation.toLowerCase() : "";
+        const etab = master.etabUaiFormation ? master.etabUaiFormation.toLowerCase() : "";
+        const dept = master.deptFormation ? `${master.deptFormation} - ${DEPARTEMENTS[master.deptFormation] || ''}`.toLowerCase() : "";
+
+        return parcours.includes(query) || ville.includes(query) || etab.includes(query) || dept.includes(query);
+    });
+}
+
+// **Gestion de la soumission de la recherche avancée**
 document.getElementById("advanced-search-form").addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -129,12 +139,12 @@ document.getElementById("advanced-search-form").addEventListener("submit", (e) =
 
     const filteredMasters = filterMastersAdvanced(filters);
     updateMastersDisplay(filteredMasters);
-    modal.style.display = "none"; // Fermer le pop-up
+    modal.style.display = "none"; 
 });
 
-// Gestion de la recherche manuelle
+// **Gestion de la recherche manuelle**
 searchButton.addEventListener("click", () => {
-    const query = searchBar.value.trim(); // Récupérer la valeur de la recherche
+    const query = searchBar.value.trim(); 
     const filteredMasters = filterMastersManual(query);
     updateMastersDisplay(filteredMasters);
 });
@@ -142,7 +152,7 @@ searchButton.addEventListener("click", () => {
 // Charger toutes les données au démarrage
 loadFullMaster().then((data) => {
     allMasters = Object.values(data.formationsById);
-    // updateMastersDisplay(allMasters); // Afficher tous les Masters initialement
+    // updateMastersDisplay(allMasters);
 }).catch((error) => {
     console.error("Erreur de chargement des données :", error);
 });

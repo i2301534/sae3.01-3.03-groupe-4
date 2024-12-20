@@ -1,77 +1,132 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Présentation du Master</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+
+    <!-- Script de la page -->
+    <script type="module" src="./javaScript/presentationMaster.js" defer></script>
 </head>
+
 <body class="bg-black text-white">
+
     <!-- Header -->
-    <header class="w-full bg-gray-800 p-4 flex items-center justify-between">
-        <div class="w-12 h-12 bg-gray-700 rounded-md"></div> <!-- Emplacement du logo -->
-        <nav class="hidden md:flex space-x-4">
-            <a href="recherche.html" class="hover:text-green-400">Retour</a>
-        </nav>
+    <header class="bg-zinc-900 p-6 text-center">
+        <h1 id="titre-master" class="text-3xl font-bold">Présentation du Master</h1>
     </header>
 
-    <!-- Contenu principal -->
+    <!-- Main Content -->
     <main class="p-6">
-        <!-- Titre -->
-        <h1 id="master-name" class="text-3xl font-bold mb-4"></h1>
 
-        <!-- Détails du Master -->
-        <div class="space-y-4">
-            <p id="master-description" class="text-lg"></p>
-            <p id="master-region" class="text-sm"></p>
-            <p id="master-ville" class="text-sm"></p>
-            <p id="master-establishment" class="text-sm"></p>
-            <p id="master-type" class="text-sm"></p>
+        <!-- Informations sur le Master -->
+        <section class="bg-zinc-800 p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4">Informations sur le Master</h2>
+            <div id="master-description" class="mb-4">Chargement des informations...</div>
+
+            <div id="master-details" class="space-y-2"></div>
+
+            <p id="admission-rate" class="mt-4 text-lg font-bold"><strong>Taux d'admission:</strong> Calcul en cours...</p>
+        </section>
+
+        <div id="master-details-section">
+            <h1 id="master-title"></h1>
+            <p><strong>Ville:</strong> <span id="master-ville"></span></p>
+            <p><strong>Département:</strong> <span id="master-dept"></span></p>
+            <p><strong>Alternance:</strong> <span id="master-alternance"></span></p>
+            <p><strong>Établissement:</strong> <span id="master-etablissement"></span></p>
+            <!-- Ajouter d'autres informations que tu souhaites afficher -->
         </div>
 
-        <!-- Section statistiques et avis -->
-        <div class="mt-8">
-            <h2 class="text-2xl mb-4">Statistiques & Avis</h2>
-            <div id="master-stats" class="p-4 bg-gray-800 rounded"></div>
-            <div id="master-avis" class="p-4 bg-gray-800 rounded mt-4"></div>
-        </div>
+        <!-- Statistiques -->
+        <section class="bg-zinc-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-4">Statistiques</h2>
+            <div id="chartContainer" class="w-full h-64"></div> <!-- Conteneur du graphique -->
+        </section>
+
     </main>
 
-    <!-- Script JS -->
+    <!-- Footer -->
+    <footer class="bg-zinc-900 p-6 text-center">
+        <p>© 2024 NaMaster - Tous droits réservés</p>
+    </footer>
+
+    <!-- Récupération du Master avec l'ID -->
     <script type="module">
-        import { loadFullMaster } from './javaScript/network.js'; 
+        import { loadFullMaster } from './javaScript/network.js';
 
-        // 1. Récupérer l'ID du Master depuis l'URL
+        // Récupérer l'ID du master à partir de l'URL
         const urlParams = new URLSearchParams(window.location.search);
-        const masterId = urlParams.get('id');
+        const masterId = urlParams.get('id'); // 'id' est le paramètre passé dans l'URL
 
-        // 2. Charger les informations du Master
-        async function fetchMasterDetails() {
+        // Afficher l'ID pour vérifier
+        console.log("ID du master:", masterId);
+
+        // Récupérer les départements pour afficher leur nom
+        const DEPARTEMENTS = {
+            "01": "Ain", "02": "Aisne", "03": "Allier", "04": "Alpes-de-Haute-Provence", "05": "Hautes-Alpes", "06": "Alpes-Maritimes",
+            "07": "Ardèche", "08": "Ardennes", "09": "Ariège", "10": "Aube", "11": "Aude", "12": "Aveyron", "13": "Bouches-du-Rhône",
+            "14": "Calvados", "15": "Cantal", "16": "Charente", "17": "Charente-Maritime", "18": "Cher", "19": "Corrèze", 
+            "2A": "Corse-du-Sud", "2B": "Haute-Corse", "21": "Côte-d'Or", "22": "Côtes-d'Armor", "23": "Creuse", "24": "Dordogne", 
+            "25": "Doubs", "26": "Drôme", "27": "Eure", "28": "Eure-et-Loir", "29": "Finistère", "30": "Gard", 
+            "31": "Haute-Garonne", "32": "Gers", "33": "Gironde", "34": "Hérault", "35": "Ille-et-Vilaine", "36": "Indre", 
+            "37": "Indre-et-Loire", "38": "Isère", "39": "Jura", "40": "Landes", "41": "Loir-et-Cher", "42": "Loire", 
+            "43": "Haute-Loire", "44": "Loire-Atlantique", "45": "Loiret", "46": "Lot", "47": "Lot-et-Garonne", "48": "Lozère", 
+            "49": "Maine-et-Loire", "50": "Manche", "51": "Marne", "52": "Haute-Marne", "53": "Mayenne", "54": "Meurthe-et-Moselle", 
+            "55": "Meuse", "56": "Morbihan", "57": "Moselle", "58": "Nièvre", "59": "Nord", "60": "Oise", 
+            "61": "Orne", "62": "Pas-de-Calais", "63": "Puy-de-Dôme", "64": "Pyrénées-Atlantiques", "65": "Hautes-Pyrénées", "66": "Pyrénées-Orientales", 
+            "67": "Bas-Rhin", "68": "Haut-Rhin", "69": "Rhône", "70": "Haute-Saône", "71": "Saône-et-Loire", "72": "Sarthe", 
+            "73": "Savoie", "74": "Haute-Savoie", "75": "Paris", "76": "Seine-Maritime", "77": "Seine-et-Marne", "78": "Yvelines", 
+            "79": "Deux-Sèvres", "80": "Somme", "81": "Tarn", "82": "Tarn-et-Garonne", "83": "Var", "84": "Vaucluse", 
+            "85": "Vendée", "86": "Vienne", "87": "Haute-Vienne", "88": "Vosges", "89": "Yonne", "90": "Territoire de Belfort", 
+            "91": "Essonne", "92": "Hauts-de-Seine", "93": "Seine-Saint-Denis", "94": "Val-de-Marne", "95": "Val-d'Oise", 
+            "971": "Guadeloupe", "972": "Martinique", "973": "Guyane", "974": "La Réunion", "976": "Mayotte"
+        };
+
+        async function loadMasterDetails(masterId) {
             try {
-                const masters = await loadFullMaster();
-                const master = masters.find(m => m.id == masterId);
+                // Charger les données complètes
+                const fullData = await loadFullMaster();
 
-                if (master) {
-                    document.getElementById('master-name').innerText = master.nom || 'Nom non disponible';
-                    document.getElementById('master-description').innerText = master.description || 'Aucune description';
-                    document.getElementById('master-region').innerText = `Région : ${master.region || 'Non renseigné'}`;
-                    document.getElementById('master-ville').innerText = `Ville : ${master.ville || 'Non renseigné'}`;
-                    document.getElementById('master-establishment').innerText = `Établissement : ${master.etablissement || 'Non renseigné'}`;
-                    document.getElementById('master-type').innerText = `Type : ${master.type || 'Non renseigné'}`;
-                    
-                    // Exemple de statistiques ou avis
-                    document.getElementById('master-stats').innerText = 'Statistiques non disponibles';
-                    document.getElementById('master-avis').innerText = 'Avis non disponibles';
-                } else {
-                    document.body.innerHTML = '<p class="text-center text-red-500">Master non trouvé</p>';
+                // Récupérer les formations à partir des données chargées
+                const formationsById = fullData.formationsById;
+
+                // Trouver la formation correspondant à l'ID du master
+                const master = formationsById[masterId]; // Assure-toi que l'ID correspond à la structure des données
+
+                if (!master) {
+                    throw new Error("Master non trouvé pour cet ID.");
                 }
+
+                // Afficher les détails du master
+                displayMasterDetails(master);
             } catch (error) {
-                console.error('Erreur lors du chargement des détails du master :', error);
+                console.error("Erreur lors du chargement des détails du master:", error);
             }
         }
 
-        // Exécuter la fonction au chargement de la page
-        fetchMasterDetails();
+        // Fonction pour afficher les détails du master
+        function displayMasterDetails(master) {
+            // Exemple de mise à jour des éléments de la page avec les détails du master
+            document.getElementById("master-title").textContent = master.parcoursFormation;
+            document.getElementById("master-ville").textContent = master.villeFormation;
+            document.getElementById("master-dept").textContent = `${master.deptFormation} - ${DEPARTEMENTS[master.deptFormation] || master.deptFormation}`;
+            document.getElementById("master-alternance").textContent = master.alternanceFormation ? "Oui" : "Non";
+            document.getElementById("master-etablissement").textContent = master.etabUaiFormation;
+            // Ajouter d'autres informations que tu souhaites afficher ici
+        }
+
+        // Charger les détails du master avec l'ID récupéré dans l'URL
+        if (masterId) {
+            loadMasterDetails(masterId);
+        }
     </script>
+
 </body>
+
 </html>

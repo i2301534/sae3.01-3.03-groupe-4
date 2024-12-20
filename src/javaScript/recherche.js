@@ -95,7 +95,7 @@ function updateMastersDisplay(masters) {
                 <p><strong>Département:</strong> ${master.deptFormation} - ${DEPARTEMENTS[master.deptFormation] || master.deptFormation}</p>
                 <p><strong>Alternance:</strong> ${master.alternanceFormation ? "Oui" : "Non"}</p>
                 <p><strong>Établissement:</strong> ${master.etabUaiFormation}</p>
-                <a href="presentationMaster.html?id=${master.id}" class="view-details pt-4">Voir les détails</a>
+                <a href="presentationMaster.html?id=${master.idFormation}" class="view-details pt-4">Voir les détails</a>
             </div>
         `;
         mastersContainer.appendChild(masterDiv);

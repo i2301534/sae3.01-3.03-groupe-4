@@ -141,43 +141,5 @@
         // Default tab
         document.getElementById('tab-formation').click();
     </script>
-
-
-    <!-- Script JS -->
-    <script type="module">
-        import { loadFullMaster } from './javaScript/network.js'; 
-
-        // 1. Récupérer l'ID du Master depuis l'URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const masterId = urlParams.get('id');
-
-        // 2. Charger les informations du Master
-        async function fetchMasterDetails() {
-            try {
-                const masters = await loadFullMaster();
-                const master = masters.find(m => m.id == masterId);
-
-                if (master) {
-                    document.getElementById('master-name').innerText = master.nom || 'Nom non disponible';
-                    document.getElementById('master-description').innerText = master.description || 'Aucune description';
-                    document.getElementById('master-region').innerText = `Région : ${master.region || 'Non renseigné'}`;
-                    document.getElementById('master-ville').innerText = `Ville : ${master.ville || 'Non renseigné'}`;
-                    document.getElementById('master-establishment').innerText = `Établissement : ${master.etablissement || 'Non renseigné'}`;
-                    document.getElementById('master-type').innerText = `Type : ${master.type || 'Non renseigné'}`;
-                    
-                    // Exemple de statistiques ou avis
-                    document.getElementById('master-stats').innerText = 'Statistiques non disponibles';
-                    document.getElementById('master-avis').innerText = 'Avis non disponibles';
-                } else {
-                    document.body.innerHTML = '<p class="text-center text-red-500">Master non trouvé</p>';
-                }
-            } catch (error) {
-                console.error('Erreur lors du chargement des détails du master :', error);
-            }
-        }
-
-        // Exécuter la fonction au chargement de la page
-        fetchMasterDetails();
-    </script>
 </body>
 </html>

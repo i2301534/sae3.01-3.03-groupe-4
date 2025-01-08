@@ -4,15 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil - NaMaster</title>
-  <link rel="icon" type="image/png" href="./Images/favicon.ico">
+  <title>Recherche - NaMaster</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
       --black-custom: #000000;
-      /* Noir complet */
       --gray-custom: #1c1c1c;
-      /* Gris sombre */
     }
 
     .master-card {
@@ -30,20 +32,38 @@
     }
 
     .view-details {
-      display: inline-block;
-      margin-top: 0.5rem;
       color: #10B981;
-      /* Vert Tailwind */
-      text-decoration: none;
     }
 
-    .view-details:hover {
-      text-decoration: underline;
+    #advanced-search-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #advanced-search-modal .modal-content {
+      background-color: var(--gray-custom);
+      padding: 2rem;
+      border-radius: 0.5rem;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    #map {
+      height: 400px;
+      width: 60%;
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
     }
   </style>
 </head>
 
-<body class="bg-black text-white m-0 p-0">
+<body class="bg-black text-white">
 
   <!-- Header -->
   <div class="flex flex-col text-xl font-bold">
@@ -51,7 +71,7 @@
     <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
       <!-- Accueil -->
       <a href="index.html"
-        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-600 text-white hover:bg-green-600">
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
         <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
         <span>Accueil</span>
       </a>
@@ -73,7 +93,7 @@
   </div>
 
   <!-- Main Content -->
-  <main class="flex flex-col items-center justify-center pt-10 text-center">
+  <main class="flex flex-col items-center justify-center pt-5 text-center">
     <!-- Logo -->
     <div class="flex items-center justify-center mb-6">
       <div class="p-6 rounded-lg flex items-center justify-center">
@@ -82,64 +102,45 @@
     </div>
 
     <!-- Titre principal -->
-    <h1 class="text-3xl font-bold mb-4">Qu’est ce que Masterclass ?</h1>
-    <p class="text-gray-400 px-4 md:px-0 mb-6 max-w-6xl">
-      Masterclass simplifie la découverte des formations en 
-      permettant aux étudiants de filtrer les résultats par nom, ville, ou établissement. 
-      Intuitive et moderne, elle offre une navigation fluide pour trouver rapidement le Master idéal adapté à vos besoins académiques et professionnels.
+    <h1 class="text-3xl font-bold mb-4">Qu’est ce que NaMaster ?</h1>
+    <p class="text-gray-400 px-4 max-w-5xl">
+      NaMaster simplifie la découverte des formations en
+      permettant aux étudiants de filtrer les résultats par nom, ville, ou établissement.
+      Intuitive et moderne, elle offre une navigation fluide pour trouver rapidement le Master idéal adapté à vos
+      besoins académiques et professionnels.
     </p>
 
-    <div class="w-full md:w-3/4" style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-      
-      <!-- Barre de recherche -->
+    <!-- Carte -->
+    <div id="map"></div>
+
+    <!-- Barre de recherche -->
+    <div class="w-full md:w-3/4"
+      style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+
       <div class="justify-center items-center mb-6">
-        <input
-            type="text"
-            id="search-bar"
-            placeholder=" Rechercher un Master par nom, ville ou établissement..."
-            class="w-4/5 p-3 rounded-full"
-            style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);"
-        />
+        <input type="text" id="search-bar" placeholder=" Rechercher un Master par nom, ville ou établissement..."
+          class="w-4/5 p-3 rounded-full"
+          style="background-color: var(--gray-custom); color: white; outline: none; border: none; border-right: 2px solid var(--gray-custom);" />
 
-        <div class="pt-5">
-          <button
-              id="search-button"
-              class="bg-green-600 hover:bg-green-600 p-3 rounded-full">
-              <img src="./Images/icon/search.svg" alt="logo" class="h-10 w-10" />
+        <button id="open-advanced-search" class="bg-gray-700 hover:bg-green-500 text-white px-4 py-2 m-6 rounded-full"
+          style="background-color: var(--gray-custom);">Recherche
+          Avancée</button>
+
+        <div>
+          <button id="search-button" class="bg-green-600 hover:bg-green-600 p-3 rounded-full">
+            <img src="./Images/icon/search.svg" alt="logo" class="h-10 w-10" />
           </button>
+        </div>
+
+        <div id="masters-container" class="mt-4 text-left"></div>
       </div>
-      
-    </div>
-
-      <!-- Liste des Masters -->
-      <div id="masters-container" class="mt-4"></div>
-  </div>
   </main>
-   <!-- Footer -->
-    <!-- Mobile Version -->
-    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
-      <!-- Accueil -->
-      <a href="index.html" class="flex flex-col items-center">
-        <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
-          <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-8 w-8" />
-        </div>
-      </a>
-    
-      <!-- Favoris -->
-      <a href="favoris.html" class="flex flex-col items-center">
-        <div class="h-16 w-16 bg-green-600 rounded-full flex items-center justify-center">
-          <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
-        </div>
-      </a>
-    
-      <!-- Statistiques -->
-      <a href="statistiques.html" class="flex flex-col items-center">
-        <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
-          <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-8 w-8" />
-        </div>
-      </a>
-  </nav>
-</body>
 
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="./javaScript/network_test.js" type="module"></script>
+  <script src="./javaScript/map.js" type="module"></script>
+
+</body>
 
 </html>

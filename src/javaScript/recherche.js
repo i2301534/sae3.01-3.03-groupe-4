@@ -1,4 +1,4 @@
-import { loadFullMaster } from "./network.js";
+import { loadFullMaster, loadSecteursDisciplinaires } from "./network.js";
 
 const mastersContainer = document.getElementById("masters-container");
 const openModal = document.getElementById("open-advanced-search");
@@ -53,8 +53,10 @@ async function loadFilters() {
         const data = await loadFullMaster();
         allMasters = Object.values(data.formationsById);
 
+        const allSecteurs = Object.values(await loadSecteursDisciplinaires());
+
         // Remplir les menus déroulants avec des valeurs uniques
-        populateSelect(formationSelect, [...new Set(allMasters.map(m => m.parcoursFormation))]);
+        populateSelect(formationSelect, [...new Set(allSecteurs.map(s => ({id: s.idSecteurDisc, name: s.nomSecteurDisc})))]);
         populateSelect(villeSelect, [...new Set(allMasters.map(m => m.villeFormation))]);
 
         const departements = Object.entries(DEPARTEMENTS).map(([code, name]) => `${code} - ${name}`);
@@ -70,8 +72,8 @@ function populateSelect(selectElement, items) {
     items.forEach(item => {
         if (item) {
             const option = document.createElement("option");
-            option.value = item; 
-            option.textContent = item; 
+            option.value = item.id ? item.id : item; 
+            option.textContent = item.name ? item.name : item; 
             selectElement.appendChild(option);
         }
     });
@@ -106,7 +108,7 @@ function updateMastersDisplay(masters) {
 function filterMastersAdvanced(filters) {
     return allMasters.filter(master => {
         const deptDisplay = `${master.deptFormation} - ${DEPARTEMENTS[master.deptFormation] || ''}`;
-        return (!filters.formation || master.parcoursFormation === filters.formation) &&
+        return (!filters.formation || master.secDiscIdFormation == filters.formation) &&
                (!filters.ville || master.villeFormation === filters.ville) &&
                (!filters.departement || deptDisplay === filters.departement) &&
                (!filters.alternance || master.alternanceFormation === true);

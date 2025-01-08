@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recherche - NaMaster</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --black-custom: #000000;
@@ -50,7 +55,7 @@
   </style>
 </head>
 
-<body class="bg-black text-white">
+<body class="bg-black text-white font-montserrat">
 
   <!-- Header -->
   <div class="flex flex-col text-xl font-bold">
@@ -89,7 +94,7 @@
     </div>
 
     <!-- Titre principal -->
-    <h1 class="text-3xl font-bold mb-4">Qu’est ce que NaMaster ?</h1>
+    <h1 class="text-3xl font-bold mb-4">Qu'est ce que NaMaster ?</h1>
     <p class="text-gray-400 px-4 max-w-5xl">
       NaMaster simplifie la découverte des formations en
       permettant aux étudiants de filtrer les résultats par nom, ville, ou établissement.
@@ -181,8 +186,9 @@
     </a>
   </nav>
 
-  <script src="./javaScript/network_test.js" type="module"></script>
+  <script src="./javaScript/network.js" type="module"></script>
   <script src="./javaScript/recherche.js" type="module"></script>
+  <script src="./javaScript/map.js" type="module"></script>
 </body>
 
 </html>

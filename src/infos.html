@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informations Complètes sur le Master</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="module" src="./javaScript/infos.js" defer></script>
+</head>
+
+<body class="bg-black text-white font-sans leading-relaxed pl-6 pr-6">
+
+    <!-- Header -->
+    <div class="flex flex-col text-xl font-bold">
+        <!-- Desktop Version -->
+        <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
+            <!-- Accueil -->
+            <a href="index.html"
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
+                <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
+                <span>Accueil</span>
+            </a>
+
+            <!-- Carte -->
+            <a href="map.html"
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+                <img src="./Images/icon/carte.png" alt="Carte Icon" class="h-6 w-6" />
+                <span>Carte</span>
+            </a>
+
+            <!-- Statistiques -->
+            <a href="statistiques.html"
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+                <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-6 w-6" />
+                <span>Statistiques</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Titre principal -->
+    <header class="bg-zinc-900 shadow mb-6 p-6 rounded-lg">
+        <h1 class="text-4xl font-bold text-center text-white">Le Master : Tout Ce Que Vous Devez Savoir</h1>
+    </header>
+
+    <!-- Présentation générale -->
+    <section class="bg--gr shadow p-6 rounded-lg mb-6">
+        <h2 class="text-2xl font-bold text-white mb-4">Qu'est-ce qu'un Master ?</h2>
+        <p class="mb-4">
+            Le Master est un diplôme universitaire de niveau Bac+5, accessible après une licence. Réparti sur deux
+            années (Master 1 et Master 2), il vise à approfondir les connaissances dans un domaine spécifique tout en
+            développant des compétences professionnelles ou académiques. Ce diplôme peut avoir une finalité
+            professionnelle (préparation à un métier spécifique) ou de recherche (préparation à un doctorat).
+            <a href="https://www.onisep.fr/Choisir-mes-etudes/Apres-le-bac/Les-etudes-superieures/Les-Masters"
+                class="text-blue-400 hover:underline" target="_blank">En savoir plus sur Onisep</a>.
+        </p>
+    </section>
+
+    <!-- Statistiques générales -->
+    <section class="bg-zinc-900 shadow p-6 rounded-lg mb-6">
+        <h2 class="text-2xl font-bold text-white mb-4">Statistiques Générales</h2>
+
+        <div class="flex flex-wrap items-start">
+            <div class="w-full md:w-1/2 pr-4">
+                <h3 class="text-xl font-semibold text-white mb-2">Taux de Réussite</h3>
+                <p class="mb-4 text-white">
+                    Selon le Ministère de l'Enseignement supérieur, près de <strong>72%</strong> des étudiants inscrits
+                    pour
+                    la
+                    première fois en Master 1 obtiennent leur diplôme en deux ou trois ans. Ce taux a augmenté par
+                    rapport à
+                    2015 où il était de <strong>66%</strong>. Cette progression reflète les efforts des universités pour
+                    améliorer l'accompagnement des étudiants.
+                    <a href="https://www.enseignementsup-recherche.gouv.fr" class="text-blue-600 hover:underline"
+                        target="_blank">Source</a>.
+                </p>
+
+                <h3 class="text-xl font-semibold text-white mb-2">Insertion Professionnelle</h3>
+                <p class="mb-4 text-white">
+                    En 2022, <strong>90%</strong> des diplômés (hors MEEF) trouvaient un emploi dans les 30 mois suivant
+                    leur
+                    diplôme, contre <strong>87%</strong> en 2018. Les Masters en gestion, ingénierie et informatique
+                    affichent
+                    des taux d'insertion atteignant <strong>95%</strong>.
+                </p>
+            </div>
+
+            <div id="reussite" class="flex md:w-1/2 h-96 rounded-lg"></div>
+        </div>
+
+
+
+
+
+        <div class="flex flex-wrap items-start pt-6">
+            <div class="w-full md:w-1/2 pr-4">
+                <h3 class="text-xl font-semibold text-white mb-2">Taux de Réussite</h3>
+                <p class="mb-4 text-white">
+                    Le nombre d'étudiants inscrits en Master a connu une augmentation constante ces dernières années. En
+                    2010,
+                    les Masters comptaient environ <strong>500 000 étudiants</strong>. En 2022, ce chiffre est passé à
+                    <strong>650 000</strong>, soit une augmentation de <strong>30%</strong> en douze ans.
+                </p>
+            </div>
+
+            <div id="inscrits" class="flex md:w-1/2 h-96 rounded-lg"></div>
+        </div>
+
+    </section>
+
+    <!-- Conseils -->
+    <section class="bg-zinc-900 shadow p-6 rounded-lg mb-6">
+        <h2 class="text-2xl font-bold text-white mb-4">Conseils pour Réussir son Master</h2>
+        <ul class="list-disc list-inside space-y-2">
+            <li><strong>Bien Choisir son Parcours :</strong> Sélectionnez une spécialité en lien avec vos objectifs
+                professionnels.</li>
+            <li><strong>Organisation :</strong> Anticipez les échéances et organisez votre emploi du temps. Les deux
+                années de Master sont souvent intenses.</li>
+            <li><strong>Stages :</strong> Les stages en entreprise sont une opportunité pour développer vos compétences
+                pratiques et construire un réseau.</li>
+            <li><strong>Engagement :</strong> Participez à des séminaires, conférences, et projets académiques pour
+                enrichir votre profil.</li>
+        </ul>
+    </section>
+
+    <!-- Débouchés -->
+    <section class="bg-zinc-900 shadow p-6 rounded-lg mb-6">
+        <h2 class="text-2xl font-bold text-white mb-4">Débouchés Généraux</h2>
+        <p class="mb-4">
+            Les Masters ouvrent des perspectives variées selon la spécialité :
+        </p>
+        <ul class="list-disc list-inside space-y-2">
+            <li><strong>Ingénierie et Sciences :</strong> R&D, conseil en ingénierie, industrie high-tech.</li>
+            <li><strong>Gestion et Management :</strong> Consulting, finance, management de projets.</li>
+            <li><strong>Arts et Culture :</strong> Métiers de la création, production culturelle.</li>
+            <li><strong>Recherche et Enseignement :</strong> Poursuite en doctorat, enseignement supérieur.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Les Secteurs en Demande</h3>
+        <p>
+            Les secteurs en forte croissance comme la transition écologique, l'intelligence artificielle, et la
+            cybersécurité offrent des opportunités intéressantes pour les diplômés de Master.
+        </p>
+    </section>
+
+    <!-- Sources -->
+    <footer class="bg-zinc-900 text-white text-sm text-center p-6 rounded-lg">
+        <p>Sources :</p>
+        <ul class="list-none">
+            <li><a href="https://www.enseignementsup-recherche.gouv.fr" class="text-blue-600 hover:underline"
+                    target="_blank">Ministère de l'Enseignement supérieur</a></li>
+            <li><a href="https://www.onisep.fr" class="text-blue-600 hover:underline" target="_blank">Onisep</a></li>
+            <li><a href="https://www.campusfrance.org" class="text-blue-600 hover:underline" target="_blank">Campus
+                    France</a></li>
+        </ul>
+    </footer>
+
+    <!-- Footer -->
+    <!-- Mobile Version -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
+        <!-- Accueil -->
+        <a href="index.html" class="flex flex-col items-center">
+            <div class="h-16 w-16 bg-green-700 rounded-full flex items-center justify-center">
+                <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-8 w-8" />
+            </div>
+        </a>
+
+        <!-- Carte -->
+        <a href="map.html" class="flex flex-col items-center">
+            <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+                <img src="./Images/icon/carte.png" alt="Carte Icon" class="h-8 w-8" />
+            </div>
+        </a>
+
+        <!-- Statistiques -->
+        <a href="statistiques.html" class="flex flex-col items-center">
+            <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
+                <img src="./Images/icon/bar-chart.png" alt="Statistiques Icon" class="h-8 w-8" />
+            </div>
+        </a>
+    </nav>
+
+</body>
+
+</html>

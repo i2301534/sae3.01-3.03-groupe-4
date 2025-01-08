@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ['Montserrat', 'sans'], // Remplacez "Roboto" par la police que vous avez ajoutée
+        mont : ['Montserrat', 'serif'],
       },
     },
   },

@@ -2,21 +2,27 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation du Master</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Présentation du Master</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 
-    <!-- Script de la page -->
-    <script type="module" src="./javaScript/presentationMaster.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <!-- Script de la page -->
+  <script type="module" src="./javaScript/presentationMaster.js" defer></script>
 </head>
 
-<body class="bg-black text-white">
+<body class="bg-black text-white font-mont">
 
-     <!-- Header -->
+  <!-- Header -->
   <div class="flex flex-col text-xl font-bold">
     <!-- Desktop Version -->
     <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
@@ -27,11 +33,11 @@
         <span>Accueil</span>
       </a>
 
-      <!-- Favoris -->
-      <a href="favoris.html"
+      <!-- Carte -->
+      <a href="map.html"
         class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
-        <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-6 w-6" />
-        <span>Favoris</span>
+        <img src="./Images/icon/carte.png" alt="Carte Icon" class="h-6 w-6" />
+        <span>Carte</span>
       </a>
 
       <!-- Statistiques -->
@@ -43,42 +49,42 @@
     </nav>
   </div>
 
-    <!-- Main Content -->
-    <main class="p-6">
+  <!-- Main Content -->
+  <main class="p-6">
 
-        <!-- Informations sur le Master -->
-        <section class="bg-zinc-800 p-6 rounded-lg shadow-lg mb-8">
-            <h2 class="text-2xl font-bold mb-4">Informations sur le Master</h2>
-            <div id="master-details-section">
-                <h1 id="master-title"></h1>
-                <p><strong>Ville:</strong> <span id="master-ville"></span></p>
-                <p><strong>Département:</strong> <span id="master-dept"></span></p>
-                <p><strong>Alternance:</strong> <span id="master-alternance"></span></p>
-                <p><strong>Établissement:</strong> <span id="master-etablissement"></span></p>
-            </div>
-            <p class="mt-4 mb-4 text-lg font-bold"><strong>Taux d'admission:</strong> <span id="admission-rate"></span></p>
-            <p class="text-xs"><strong>Année de collecte des informations : </strong>2023</p>
-        </section>
+    <!-- Informations sur le Master -->
+    <section class="bg-zinc-800 p-6 rounded-lg shadow-lg mb-8">
+      <h2 class="text-2xl font-bold mb-4">Informations sur le Master</h2>
+      <div id="master-details-section">
+        <h1 id="master-title"></h1>
+        <p><strong>Ville:</strong> <span id="master-ville"></span></p>
+        <p><strong>Département:</strong> <span id="master-dept"></span></p>
+        <p><strong>Alternance:</strong> <span id="master-alternance"></span></p>
+        <p><strong>Établissement:</strong> <span id="master-etablissement"></span></p>
+      </div>
+      <p class="mt-4 mb-4 text-lg font-bold"><strong>Taux d'admission:</strong> <span id="admission-rate"></span></p>
+      <p class="text-xs"><strong>Année de collecte des informations : </strong>2023</p>
+    </section>
 
-        <!-- Statistiques -->
-        <section class="bg-zinc-800 p-6 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-bold mb-4">Statistiques</h2>
-            <!-- Conteneur des graphiques -->
-            <div class="lg:flex justify-center">
-                <!-- Graphique 1 -->
-                <div id="chart1" class="w-full md:w-1/2 h-96 rounded-lg"></div>
-                <!-- Graphique 2 -->
-                <div id="chart2" class="w-full md:w-1/2 h-96 rounded-lg"></div>
-            </div>
-            <div class="lg:flex justify-center">
-                <!-- Graphique 3 -->
-                <div id="chart3" class="w-full md:w-1/2 h-96 rounded-lg"></div>
-            </div>
-        </section>
-    </main>
+    <!-- Statistiques -->
+    <section class="bg-zinc-800 p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold mb-4">Statistiques</h2>
+      <!-- Conteneur des graphiques -->
+      <div class="lg:flex justify-center">
+        <!-- Graphique 1 -->
+        <div id="chart1" class="w-full md:w-1/2 h-96 rounded-lg"></div>
+        <!-- Graphique 2 -->
+        <div id="chart2" class="w-full md:w-1/2 h-96 rounded-lg"></div>
+      </div>
+      <div class="lg:flex justify-center">
+        <!-- Graphique 3 -->
+        <div id="chart3" class="w-full md:w-1/2 h-96 rounded-lg"></div>
+      </div>
+    </section>
+  </main>
 
-    <!-- Footer -->
-     <!-- Footer -->
+  <!-- Footer -->
+  <!-- Footer -->
   <!-- Mobile Version -->
   <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
     <!-- Accueil -->
@@ -88,10 +94,10 @@
       </div>
     </a>
 
-    <!-- Favoris -->
-    <a href="favoris.html" class="flex flex-col items-center">
+    <!-- Carte -->
+    <a href="map.html" class="flex flex-col items-center">
       <div class="h-16 w-16 bg-zinc-500 rounded-full flex items-center justify-center">
-        <img src="./Images/icon/bookmark.png" alt="Favoris Icon" class="h-8 w-8" />
+        <img src="./Images/icon/carte.png" alt="Carte Icon" class="h-8 w-8" />
       </div>
     </a>
 
@@ -102,9 +108,9 @@
       </div>
     </a>
   </nav>
-    <footer class="bg-zinc-900 p-6 text-center">
-        <p>© 2024 NaMaster - Tous droits réservés</p>
-    </footer>
+  <footer class="bg-zinc-900 p-6 text-center">
+    <p>© 2024 NaMaster - Tous droits réservés</p>
+  </footer>
 
 </body>
 

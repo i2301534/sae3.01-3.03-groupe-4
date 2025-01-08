@@ -49,7 +49,7 @@ export async function initMap() {
                     lat,
                     lon,
                     etablissement: formation.etablissement,
-                    ville: `${formation.ville} (${formation.dept})`,
+                    ville: `${formation.ville}`,
                     formations: [],
                     etabUai: formation.etabUai
                 };
@@ -92,8 +92,9 @@ export async function initMap() {
                 className: 'custom-tooltip'
             });
 
+            // Rediriger vers l'index avec une recherche sur la ville
             markerLayer.on('click', () => {
-                const url = `recherche.html?q=${encodeURIComponent(location.etablissement)}&id=${location.etabUai}`;
+                const url = `index.html?search=${encodeURIComponent(location.ville)}`;
                 window.location.href = url;
             });
         });
@@ -107,3 +108,11 @@ export async function initMap() {
 document.addEventListener('DOMContentLoaded', () => {
     initMap();
 });
+
+// Rediriger vers l'index avec une ville préremplie et lancer une recherche
+markerLayer.on('click', () => {
+    const ville = location.ville; // Utiliser la ville sélectionnée
+    const url = `index.html?search=${encodeURIComponent(ville)}`;
+    window.location.href = url; // Rediriger vers index.html avec la ville comme paramètre
+});
+

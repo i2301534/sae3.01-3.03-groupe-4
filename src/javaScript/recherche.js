@@ -158,3 +158,12 @@ loadFullMaster().then((data) => {
 }).catch((error) => {
     console.error("Erreur de chargement des données :", error);
 });
+
+// Gestion de la recherche manuelle
+searchButton.addEventListener("click", () => {
+    const query = searchBar.value.trim(); 
+    const filteredMasters = filterMastersManual(query);
+    updateMastersDisplay(filteredMasters); // Mettre à jour l'affichage
+});
+
+

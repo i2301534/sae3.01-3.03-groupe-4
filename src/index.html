@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recherche - NaMaster</title>
+  <title>Accueil - NaMaster</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
@@ -58,7 +58,7 @@
     <nav class="hidden md:flex justify-center gap-12 bg-black text-white p-6">
       <!-- Accueil -->
       <a href="index.html"
-      class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-700 text-white hover:bg-green-600">
         <img src="./Images/icon/home.png" alt="Accueil Icon" class="h-6 w-6" />
         <span>Accueil</span>
       </a>
@@ -72,7 +72,7 @@
 
       <!-- Statistiques -->
       <a href="infos.html"
-      class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-gray-700">
         <img src="./Images/icon/information.png" alt="Informations Icon" class="h-6 w-6" />
         <span>Informations</span>
       </a>
@@ -127,25 +127,29 @@
       <form id="advanced-search-form" class="space-y-4">
         <div>
           <label for="formation">Formation</label>
-          <select id="formation" class="w-full p-2 bg-black text-white rounded">
+          <select id="formation"
+            class="w-full p-2 bg-black text-white rounded border-2 border-green-500 focus:outline-none focus:ring-2 focus:ring-green-400">
             <option value="">-- Choisir une Formation --</option>
           </select>
         </div>
         <div>
           <label for="departement">Département</label>
-          <select id="departement" class="w-full p-2 bg-black text-white rounded">
+          <select id="departement"
+            class="w-full p-2 bg-black text-white rounded border-2 border-green-500 focus:outline-none focus:ring-2 focus:ring-green-400">
             <option value="">-- Choisir un Département --</option>
           </select>
         </div>
         <div>
           <label for="ville">Ville</label>
-          <select id="ville" class="w-full p-2 bg-black text-white rounded">
+          <select id="ville"
+            class="w-full p-2 bg-black text-white rounded border-2 border-green-500 focus:outline-none focus:ring-2 focus:ring-green-400">
             <option value="">-- Choisir une Ville --</option>
           </select>
         </div>
         <div>
           <label>
-            <input type="checkbox" id="alternance"> Alternance
+            <input type="checkbox" id="alternance"
+              class="border-2 border-green-500 rounded focus:outline-none focus:ring-2 focus:ring-green-400"> Alternance
           </label>
         </div>
         <div class="flex justify-end">
@@ -156,7 +160,12 @@
     </div>
   </div>
 
+
   <!-- Footer -->
+  <footer class="bg-zinc-900 text-gray-400 text-sm text-center p-6 rounded-lg">
+    <p>&copy; 2025 NaMaster - Tous droits réservés.</p>
+    <a href="legal.html" class="text-green-600 hover:underline" target="_blank">Informations Légales</a>
+  </footer>
   <!-- Mobile Version -->
   <nav class="md:hidden fixed bottom-0 w-full bg-zinc-900 text-white flex justify-around p-4">
     <!-- Accueil -->

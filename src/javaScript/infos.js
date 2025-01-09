@@ -253,10 +253,6 @@ var option4 = {
         trigger: 'item',
         textStyle: { color: 'white' }
     },
-    legend: {
-        bottom: '0',
-        textStyle: { color: 'white' }
-    },
     series: [
         {
             name: 'Conseils',
@@ -294,10 +290,6 @@ var option5 = {
     },
     tooltip: {
         trigger: 'item',
-        textStyle: { color: 'white' }
-    },
-    legend: {
-        bottom: '0',
         textStyle: { color: 'white' }
     },
     series: [

@@ -97,7 +97,7 @@ const master = await loadMasterDetails(masterId);
 const chart1 = echarts.init(document.getElementById('chart1'));
 const option1 = {
     title: {
-        text: 'Taux dadmissions',
+        text: "Taux d'admission",
         textStyle: { color: '#ffffff' }
     },
     tooltip: {

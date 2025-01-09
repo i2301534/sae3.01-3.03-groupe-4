@@ -157,3 +157,173 @@ var option2 = {
     ]
 };
 myChart2.setOption(option2);
+
+// Graph Taux d'insertion professionnelle
+var chartDom3 = document.getElementById('insertion');
+var myChart3 = echarts.init(chartDom3);
+var option3 = {
+    title: {
+        text: "Taux d'insertion professionnelle (18 et 30 mois)",
+        left: 'center',
+        textStyle: {
+            color: 'white'
+        }
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['18 mois', '30 mois'],
+        top: '10%',
+        textStyle: {
+            color: 'white'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'category',
+        data: ['Licence Pro', 'Master', 'BUT'],
+        axisLine: {
+            lineStyle: {
+                color: 'white'
+            }
+        },
+        axisLabel: {
+            color: 'white'
+        }
+    },
+    yAxis: {
+        type: 'value',
+        min: 80,
+        max: 100,
+        axisLine: {
+            lineStyle: {
+                color: 'white'
+            }
+        },
+        axisLabel: {
+            formatter: '{value} %',
+            color: 'white'
+        },
+        splitLine: {
+            lineStyle: {
+                color: '#444'
+            }
+        }
+    },
+    series: [
+        {
+            name: '18 mois',
+            type: 'bar',
+            data: [92, 92, 84],
+            itemStyle: {
+                color: '#fff55f'
+            }
+        },
+        {
+            name: '30 mois',
+            type: 'bar',
+            data: [95, 93, 92],
+            itemStyle: {
+                color: '#ff835f'
+            }
+        }
+    ]
+};
+myChart3.setOption(option3);
+
+// Graph Conseils pour Réussir son Master
+var chartDom4 = document.getElementById('conseils-pie');
+var myChart4 = echarts.init(chartDom4);
+var option4 = {
+    title: {
+        text: 'Conseils pour Réussir',
+        left: 'center',
+        textStyle: { color: 'white' }
+    },
+    tooltip: {
+        trigger: 'item',
+        textStyle: { color: 'white' }
+    },
+    legend: {
+        bottom: '0',
+        textStyle: { color: 'white' }
+    },
+    series: [
+        {
+            name: 'Conseils',
+            type: 'pie',
+            radius: '50%',
+            data: [
+                { value: 30, name: 'Choix du Parcours' },
+                { value: 25, name: 'Organisation' },
+                { value: 25, name: 'Stages' },
+                { value: 20, name: 'Engagement' }
+            ],
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            },
+            label: {
+                color: 'white'
+            }
+        }
+    ]
+};
+myChart4.setOption(option4);
+
+// Graph Débouchés Généraux
+var chartDom5 = document.getElementById('debouches-pie');
+var myChart5 = echarts.init(chartDom5);
+var option5 = {
+    title: {
+        text: 'Débouchés Généraux',
+        left: 'center',
+        textStyle: { color: 'white' }
+    },
+    tooltip: {
+        trigger: 'item',
+        textStyle: { color: 'white' }
+    },
+    legend: {
+        bottom: '0',
+        textStyle: { color: 'white' }
+    },
+    series: [
+        {
+            name: 'Débouchés',
+            type: 'pie',
+            radius: '50%',
+            data: [
+                { value: 35, name: 'Ingénierie et Sciences' },
+                { value: 30, name: 'Gestion et Management' },
+                { value: 20, name: 'Arts et Culture' },
+                { value: 15, name: 'Recherche et Enseignement' }
+            ],
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            },
+            label: {
+                color: 'white'
+            }
+        }
+    ]
+};
+myChart5.setOption(option5);
+
+

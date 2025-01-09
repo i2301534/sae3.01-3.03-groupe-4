@@ -97,7 +97,7 @@ const master = await loadMasterDetails(masterId);
 const chart1 = echarts.init(document.getElementById('chart1'));
 const option1 = {
     title: {
-        text: 'Taux d admissions',
+        text: 'Taux dadmissions',
         textStyle: { color: '#ffffff' }
     },
     tooltip: {
@@ -105,7 +105,7 @@ const option1 = {
     },
     xAxis: {
         type: 'category',
-        data: ['Capacité', 'Candidatures', 'Admis', 'Inscrits'],
+        data: ['Places Dispo.', 'Candidatures', 'Admis', 'Inscrits'],
         axisLabel: { color: '#ffffff' }
     },
     yAxis: {
@@ -189,7 +189,7 @@ const option3 = {
     series: [{
         name: 'Salaire en €',
         data: [
-            { value: master.stats.netMedianTempsPlein },
+            { value: master.stats.lg3?.nb },
             { value: master.stats.brutAnnuelEstime },
         ],
         type: 'bar',

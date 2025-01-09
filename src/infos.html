@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informations Complètes sur le Master - NaMaster</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="output.css">
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script type="module" src="./javaScript/infos.js" defer></script>
 </head>
@@ -85,14 +85,43 @@
                     des taux d'insertion atteignant <strong>95%</strong>.
                 </p>
             </div>
-
             <div id="reussite" class="flex md:w-1/2 h-96 rounded-lg"></div>
         </div>
 
-
-
-
-
+        <div class="flex flex-wrap items-start">
+            <div class="w-full md:w-1/2 pr-4">
+                <h3 class="text-xl font-semibold text-white mb-2">Taux de Réussite</h3>
+                <p class="mb-4 text-white">
+                    Les statistiques d'insertion professionnelle des diplômés en France mettent en lumière la forte employabilité des formations universitaires.
+                    À 18 mois après l'obtention de leur diplôme, <strong>92%</strong> des titulaires d'une Licence Professionnelle et d'un Master
+                    sont insérés dans le marché du travail, un chiffre qui atteint respectivement <strong>95%</strong> et <strong>93%</strong> à 30 mois.
+                    Les diplômés d'un BUT (anciennement DUT) présentent également un excellent taux d'insertion, avec <strong>84%</strong> à 18 mois
+                    et <strong>92%</strong> à 30 mois. Ces données reflètent l'efficacité des formations dans leur capacité à répondre aux besoins du marché
+                    de l'emploi, avec des taux élevés de professionnalisation, notamment dans les filières professionnalisantes comme la Licence Pro et le BUT.
+                </p>
+                <ul class="list-disc list-inside text-blue-400">
+                    <li>
+                        <a href="https://www.enseignementsup-recherche.gouv.fr/fr/l-insertion-professionnelle-18-et-30-mois-des-diplomes-2020-de-licence-professionnelle-92898"
+                           target="_blank" class="hover:underline">
+                           L’insertion professionnelle à 18 et 30 mois des diplômés 2020 de licence professionnelle
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.enseignementsup-recherche.gouv.fr/fr/l-insertion-professionnelle-18-et-30-mois-des-diplomes-2020-de-master-92895"
+                           target="_blank" class="hover:underline">
+                           L’insertion professionnelle à 18 et 30 mois des diplômés 2020 de master
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://publication.enseignementsup-recherche.gouv.fr/eesr/FR/EESR16_ES_24/l_insertion_professionnelle_des_diplomes_2019_de_l_universite_dut_licence_professionnelle_master/"
+                           target="_blank" class="hover:underline">
+                           L'insertion professionnelle des diplômés 2019 de l'université
+                        </a>
+                    </li>
+            </div>
+            <div id="insertion" class="flex md:w-1/2 h-96 rounded-lg"></div>
+        </div>
+        
         <div class="flex flex-wrap items-start pt-6">
             <div class="w-full md:w-1/2 pr-4">
                 <h3 class="text-xl font-semibold text-white mb-2">Taux de Réussite</h3>
@@ -110,7 +139,7 @@
     </section>
 
     <!-- Conseils -->
-    <section class="bg-zinc-900 shadow p-6 rounded-lg mb-6">
+    <section class="bg-zinc-900 shadow p-6 rounded-lg mb-6 flex flex-wrap items-start">
         <h2 class="text-2xl font-bold text-white mb-4">Conseils pour Réussir son Master</h2>
         <ul class="list-disc list-inside space-y-2">
             <li><strong>Bien Choisir son Parcours :</strong> Sélectionnez une spécialité en lien avec vos objectifs
@@ -122,6 +151,8 @@
             <li><strong>Engagement :</strong> Participez à des séminaires, conférences, et projets académiques pour
                 enrichir votre profil.</li>
         </ul>
+
+        <div id="conseils-pie" class="flex md:w-1/2 h-96 rounded-lg"></div>
     </section>
 
     <!-- Débouchés -->
@@ -137,17 +168,13 @@
             <li><strong>Recherche et Enseignement :</strong> Poursuite en doctorat, enseignement supérieur.</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">Les Secteurs en Demande</h3>
-        <p>
-            Les secteurs en forte croissance comme la transition écologique, l'intelligence artificielle, et la
-            cybersécurité offrent des opportunités intéressantes pour les diplômés de Master.
-        </p>
+        <div id="debouches-pie" class="pt-6 flex md:w-1/2 h-96 rounded-lg"></div>
     </section>
 
     <!-- Sources -->
     <footer class="bg-zinc-900 text-gray-400 text-sm text-center p-6 rounded-lg">
         <p>Sources :</p>
-        <ul class="list-none">
+        <ul class="list-none pb-4">
             <li><a href="https://www.enseignementsup-recherche.gouv.fr" class="text-blue-600 hover:underline"
                     target="_blank">Ministère de l'Enseignement supérieur</a></li>
             <li><a href="https://www.onisep.fr" class="text-blue-600 hover:underline" target="_blank">Onisep</a></li>

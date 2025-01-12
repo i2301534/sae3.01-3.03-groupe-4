@@ -106,7 +106,7 @@ NaMaster est une application web interactive conçue pour accompagner les étudi
 
 ---
 ### **7. Bugs Tracking**
-[Consulter le Bug Tracking](BUG_TRACKING.md)
+[Consulter le Bug Tracking](assets/images/Bugs_Tracking.pdf)
 
 ### **8. Améliorations futures**
 1. Optimisation des temps de chargement des formations et des statistiques.
